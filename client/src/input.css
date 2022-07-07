@@ -1,0 +1,11 @@
+.mainui {
+    display: flex;
+}
+
+.fileInput {
+    opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;
+}
+
+.fileInputDiv {
+    position: relative; border: 1px solid black; width: 150px; height: 30px; line-height: 30px; text-align: center;
+}
