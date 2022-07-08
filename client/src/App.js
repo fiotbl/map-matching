@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLoadScript, GoogleMap, Marker, Polyline } from "@react-google-maps/api";
 import "./input.css";
 
@@ -65,6 +65,7 @@ function App() {
 
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const [fileContent, setFileContent] = useState("");
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -76,7 +77,8 @@ function App() {
 
   const handleFileRead = (e) => {
     const content = fileReader.result;
-    console.log(content)
+    setFileContent(JSON.parse(content))
+    console.log(fileContent);
   }
 
   const handleSubmission = () => {
