@@ -21,12 +21,6 @@ const options = {
   editable: false,
   visible: true,
   radius: 30000,
-  paths: [
-    { lat: 37.772, lng: -122.214 },
-    { lat: 21.291, lng: -157.821 },
-    { lat: -18.142, lng: 178.431 },
-    { lat: -27.467, lng: 153.027 }
-  ],
   zIndex: 1
 };
 
@@ -52,10 +46,7 @@ function App() {
     const userGPSData = {
       data: userInput.enteredText,
     }
-    // prop.onAddNewExpense(expenseData); // prop to pass data to NewExpense parent
-    // console.log(expenseData.title);
-    // console.log(expenseData.amount);
-    // console.log(expenseData.date);
+
     setUserInput({
       enteredText: '',
     })
