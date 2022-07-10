@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 1. Input GPS data from user (json file)
 2. Visual output of the Map Matching
 
-![alt text](https://en.wikipedia.org/wiki/Map_matching#/media/File:Map_Matching_Example_with_GraphHopper.png)
+![alt text](https://miro.medium.com/max/1400/1*5UCbEwih6uqYxBrKns-VuA.png)
 
 ### Internally :gear:
 
