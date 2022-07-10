@@ -26,44 +26,20 @@ const options = {
 
 
 function App() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
-  });
-  // const [userInput, setUserInput] = useState({
-  //   enteredText: '',
-  // });
-
-  // const textChangeHandler = (event) => {
-  //   setUserInput({
-  //     enteredText: event.target.value,
-  //   })
-  //   console.log(userInput.enteredText)
-  // }
-
-  // const submitHandler = (event) => {
-  //   event.preventDefault(); // prevent default of request being sent and page reloading
-  //   const userGPSData = {
-  //     data: userInput.enteredText,
-  //   }
-
-  //   setUserInput({
-  //     enteredText: '',
-  //   })
-  //   console.log(userGPSData)
-
-  // };
-
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [fileContent, setFileContent] = useState();
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
+  });
 
-  const changeHandler = (event) => {
+  let fileReader;
+
+  const fileInputHandler = (event) => {
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
   };
 
-
-  let fileReader;
 
   const handleFileRead = (e) => {
     const content = fileReader.result;
@@ -86,9 +62,7 @@ function App() {
   const handleClear = () => {
     setSelectedFile();
     setIsFilePicked(false);
-    console.log(fileContent)
   };
-
 
   useEffect(() => {
     fetch("/result", {
@@ -101,8 +75,6 @@ function App() {
     }
     )
   }, [fileContent])
-
-
 
   const renderMap = () => {
     return (
@@ -123,17 +95,10 @@ function App() {
             options={options}
           />
         </GoogleMap>
-        {/* <form onSubmit={submitHandler}>
-          <label>
-            GPS Data Json:
-          </label>
-          <textarea onChange={textChangeHandler}></textarea>
-          <input type="submit" value="Submit" />
-        </form> */}
 
         <div className="fileInputDiv" >
-          Choose JSON file
-          <input type="file" className="fileInput" onChange={changeHandler} />
+          Upload JSON file
+          <input type="file" className="fileInput" onChange={fileInputHandler} />
         </div>
 
         {isFilePicked ? (
