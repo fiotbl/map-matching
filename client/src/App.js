@@ -31,7 +31,6 @@ function App() {
   });
   const [userInput, setUserInput] = useState({
     enteredText: '',
-
   });
 
   const textChangeHandler = (event) => {
@@ -56,7 +55,7 @@ function App() {
 
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
-  const [fileContent, setFileContent] = useState("");
+  const [fileContent, setFileContent] = useState();
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -76,8 +75,29 @@ function App() {
     console.log(selectedFile)
     fileReader = new FileReader()
     fileReader.onloadend = handleFileRead;
+    // setFileContent(JSON.parse(fileReader.result))
     fileReader.readAsText(selectedFile)
+    // const content = fileReader.result;
+    console.log(fileContent);
+
+
+
   };
+
+
+  useEffect(() => {
+    fetch("/result", {
+      method: "POST",
+      cache: "no-cache",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(fileContent)
+    }
+    )
+  }, [fileContent])
+
+
 
   const renderMap = () => {
     return (
