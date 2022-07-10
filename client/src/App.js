@@ -29,29 +29,29 @@ function App() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
   });
-  const [userInput, setUserInput] = useState({
-    enteredText: '',
-  });
+  // const [userInput, setUserInput] = useState({
+  //   enteredText: '',
+  // });
 
-  const textChangeHandler = (event) => {
-    setUserInput({
-      enteredText: event.target.value,
-    })
-    console.log(userInput.enteredText)
-  }
+  // const textChangeHandler = (event) => {
+  //   setUserInput({
+  //     enteredText: event.target.value,
+  //   })
+  //   console.log(userInput.enteredText)
+  // }
 
-  const submitHandler = (event) => {
-    event.preventDefault(); // prevent default of request being sent and page reloading
-    const userGPSData = {
-      data: userInput.enteredText,
-    }
+  // const submitHandler = (event) => {
+  //   event.preventDefault(); // prevent default of request being sent and page reloading
+  //   const userGPSData = {
+  //     data: userInput.enteredText,
+  //   }
 
-    setUserInput({
-      enteredText: '',
-    })
-    console.log(userGPSData)
+  //   setUserInput({
+  //     enteredText: '',
+  //   })
+  //   console.log(userGPSData)
 
-  };
+  // };
 
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
@@ -67,21 +67,26 @@ function App() {
 
   const handleFileRead = (e) => {
     const content = fileReader.result;
-    setFileContent(JSON.parse(content))
-    console.log(fileContent);
+    setFileContent(JSON.parse(content));
   }
 
   const handleSubmission = () => {
     console.log(selectedFile)
-    fileReader = new FileReader()
-    fileReader.onloadend = handleFileRead;
-    // setFileContent(JSON.parse(fileReader.result))
-    fileReader.readAsText(selectedFile)
-    // const content = fileReader.result;
-    console.log(fileContent);
+    try {
+      fileReader = new FileReader()
+      fileReader.onloadend = handleFileRead;
+      fileReader.readAsText(selectedFile)
+      console.log(fileContent)
+    } catch (error) {
+      console.log(error)
+    }
 
+  };
 
-
+  const handleClear = () => {
+    setSelectedFile();
+    setIsFilePicked(false);
+    console.log(fileContent)
   };
 
 
@@ -146,6 +151,7 @@ function App() {
         )}
         <div>
           <button onClick={handleSubmission}>Submit</button>
+          <button onClick={handleClear}>Clear</button>
         </div>
       </div>
     );
