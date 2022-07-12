@@ -47,7 +47,11 @@ const UserInput = () => {
             },
             body: JSON.stringify(fileContent)
         }
-        )
+        ).then((response) => response.text())
+            .then((responseData) => {
+                console.log(responseData);
+            })
+            .catch(error => console.warn(error));
     }, [fileContent])
 
 
