@@ -6,6 +6,7 @@ const UserInput = () => {
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [fileContent, setFileContent] = useState();
+    const [snappedGeopoints, setSnappedGeopoints] = useState("");
 
     let fileReader;
 
@@ -47,10 +48,11 @@ const UserInput = () => {
             },
             body: JSON.stringify(fileContent)
         }
-        ).then((response) => response.text())
-            .then((responseData) => {
-                console.log(responseData);
-            })
+        ).then((response) => response.text()
+        ).then((responseData) => {
+            setSnappedGeopoints(responseData)
+            console.log(snappedGeopoints)
+        })
             .catch(error => console.warn(error));
     }, [fileContent])
 

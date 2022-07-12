@@ -9,8 +9,7 @@ CORS(app)
 
 googleMapsApiKey = os.getenv("REACT_APP_GOOGLE_API_KEY")
 
-path = "60.170880,24.942795|60.170879,24.942796|60.170877,24.942796"
-# path = "-35.27801%2C149.12958%7C-35.28032%2C149.12907%7C-35.28099%2C149.12929%7C-35.28144%2C149.12984%7C-35.28194%2C149.13003%7C-35.28282%2C149.12956%7C-35.28302%2C149.12881%7C-35.28473%2C149.12836"
+# path = "60.170880,24.942795|60.170879,24.942796|60.170877,24.942796"
 googleurl = "https://roads.googleapis.com/v1/snapToRoads?path=" 
 interpolate = "&interpolate=true&key=" 
 
@@ -55,10 +54,7 @@ def result():
         headers = {}
         response = requests.request("GET", url, headers=headers, data=payload)
         geopoints_list = convert_request(response)
-
-
         return str(geopoints_list)
-    
 
     return "No geopoints receieved"
 
