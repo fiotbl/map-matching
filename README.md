@@ -3,14 +3,14 @@
 Website for users to input json GPS data to map match the GPS data points. Routes before and after the map matching algorithm is done will be shown visually on the map.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+![alt text](https://miro.medium.com/max/1400/1*5UCbEwih6uqYxBrKns-VuA.png)
+
 ## Overview
 
 ### Objectives of the website :round_pushpin:
 
 1. Input GPS data from user (json file)
 2. Visual output of the Map Matching
-
-![alt text](https://miro.medium.com/max/1400/1*5UCbEwih6uqYxBrKns-VuA.png)
 
 ### Internally :gear:
 
