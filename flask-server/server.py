@@ -31,11 +31,6 @@ def convert_request(response):
                 geopoints_list.append(indiv_geopoints)
     return geopoints_list
 
-# Members API Route
-@app.route("/members")
-def members():
-    return {"members": ["Mem1", "Mem2", "Mem3"]}
-
 @app.route('/result', methods = ['POST'])
 def result():
     geopoints = request.json

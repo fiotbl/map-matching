@@ -23,7 +23,15 @@ const options = {
 };
 
 const Map = (prop) => {
-    console.log(prop.rawJson)
+    let rawJson = prop.rawJson
+    let rawGeopoints = rawJson[Object.keys(rawJson)[0]];
+    console.log(rawGeopoints);
+
+    let pairs = [];
+    for (let key in rawGeopoints) {
+        pairs.push({ key });
+    }
+
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
     });
