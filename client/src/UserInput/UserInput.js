@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import "./UserInput.css";
 
-const UserInput = () => {
+const UserInput = (prop) => {
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [fileContent, setFileContent] = useState();
@@ -31,6 +31,7 @@ const UserInput = () => {
         } catch (error) {
             console.log(error)
         }
+        prop.onSetRawJson(fileContent)
 
     };
 

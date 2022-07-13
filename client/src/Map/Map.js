@@ -22,7 +22,8 @@ const options = {
     zIndex: 1
 };
 
-const Map = () => {
+const Map = (prop) => {
+    console.log(prop.rawJson)
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
     });
@@ -46,7 +47,6 @@ const Map = () => {
                         options={options}
                     />
                 </GoogleMap>
-
             </div>
         );
     };
