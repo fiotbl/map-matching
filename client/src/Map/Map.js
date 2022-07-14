@@ -23,14 +23,25 @@ const options = {
 };
 
 const Map = (prop) => {
-    let rawJson = prop.rawJson
-    let rawGeopoints = rawJson[Object.keys(rawJson)[0]];
-    console.log(rawGeopoints);
+    if (prop.rawJson !== undefined) {
+        let rawJson = prop.rawJson
+        let rawGeopoints = rawJson[Object.keys(rawJson)[0]];
+        console.log(rawGeopoints);
+
+        for (const [key, value] of Object.entries(rawGeopoints)) {
+            for (const [key_geopoint, value_geopoint] of Object.entries(value)) {
+                if (key_geopoint === "lat") {
+                    console.log(value_geopoint);
+                }
+            }
+        }
+    }
+
 
     let pairs = [];
-    for (let key in rawGeopoints) {
-        pairs.push({ key });
-    }
+    // for (let key in rawGeopoints) {
+    //     pairs.push({ key });
+    // }
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
