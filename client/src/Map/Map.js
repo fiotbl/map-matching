@@ -23,25 +23,28 @@ const options = {
 };
 
 const Map = (prop) => {
+    let usersPath = []
     if (prop.rawJson !== undefined) {
         let rawJson = prop.rawJson
         let rawGeopoints = rawJson[Object.keys(rawJson)[0]];
         console.log(rawGeopoints);
 
         for (const [key, value] of Object.entries(rawGeopoints)) {
+            let dictJson = {}
             for (const [key_geopoint, value_geopoint] of Object.entries(value)) {
                 if (key_geopoint === "lat") {
-                    console.log(value_geopoint);
+                    dictJson[key_geopoint] = value_geopoint;
+                    console.log(dictJson);
+                }
+                else if (key_geopoint === "lng") {
+                    dictJson[key_geopoint] = value_geopoint;
+                    console.log(dictJson);
                 }
             }
+            usersPath.push(dictJson);
         }
+        console.log(usersPath)
     }
-
-
-    let pairs = [];
-    // for (let key in rawGeopoints) {
-    //     pairs.push({ key });
-    // }
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
@@ -62,7 +65,7 @@ const Map = (prop) => {
                         position={{ lat: 1.3521, lng: 103.8198 }}
                     />
                     <Polyline
-                        path={path}
+                        path={usersPath}
                         options={options}
                     />
                 </GoogleMap>
