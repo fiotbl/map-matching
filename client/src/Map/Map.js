@@ -61,9 +61,14 @@ const Map = (prop) => {
                         width: "95%"
                     }}
                 >
-                    <Marker
+                    {usersPath.map((geopoint) =>
+                    (<Marker
+                        position={{ lat: geopoint.lat, lng: geopoint.lng }}
+                    />))}
+                    {/* <Marker
                         position={{ lat: 1.3521, lng: 103.8198 }}
-                    />
+
+                    /> */}
                     <Polyline
                         path={usersPath}
                         options={options}
