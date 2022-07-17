@@ -21,26 +21,11 @@ const UserInput = (prop) => {
         const content = e.target.result;
         console.log('file content', content)
         setFileContent(JSON.parse(content));
-        // You can set content in state and show it in render.
     }
-
-    // const handleFileRead = (e) => {
-    //     const content = fileReader.result;
-    //     setFileContent(JSON.parse(content));
-    // }
 
     const handleSubmission = () => {
         console.log(selectedFile)
         setIsFileSubmit(true);
-
-        // try {
-        //     let fileReader = new FileReader()
-        //     fileReader.onloadend = handleFileRead;
-        //     fileReader.readAsText(JSON.parse(fileReader.result))
-        //     console.log(fileReader.result)
-        // } catch (error) {
-        //     console.log(error)
-        // }
         prop.onSetRawJson(fileContent)
 
     };
@@ -63,9 +48,10 @@ const UserInput = (prop) => {
         ).then((responseData) => {
             setSnappedGeopoints(responseData)
             console.log(snappedGeopoints)
+            prop.OnSetSnappedGeopoints(snappedGeopoints)
         })
             .catch(error => console.warn(error));
-    }, [isFileSubmit])
+    }, [isFileSubmit, fileContent])
 
 
     return (

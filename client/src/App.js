@@ -5,19 +5,25 @@ import './App.css'
 
 function App() {
   const [rawJson, setRawJson] = useState()
+  const [snappedJson, setSnappedJson] = useState()
 
   const setRawJsonHandler = geopoints => {
     setRawJson(geopoints)
     console.log(geopoints)
   }
 
+  const setSnappedGeopoints = snappedGeopoints => {
+    setSnappedJson(snappedGeopoints)
+    console.log(snappedGeopoints)
+  }
+
   return (
     <div className="MainUI">
       <div className="Map">
-        <Map rawJson={rawJson} />
+        <Map rawJson={rawJson} snappedJson={snappedJson} />
       </div>
       <div className="UserInput">
-        <UserInput onSetRawJson={setRawJsonHandler} />
+        <UserInput onSetRawJson={setRawJsonHandler} OnSetSnappedGeopoints={setSnappedGeopoints} />
       </div>
     </div>
   )

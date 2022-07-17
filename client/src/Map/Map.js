@@ -46,6 +46,12 @@ const Map = (prop) => {
         console.log(usersPath)
     }
 
+    // let snappedGeopointsJson = JSON.parse(prop.snappedJson)
+    // console.log(prop.snappedJson)
+    let snappedJson = prop.snappedJson
+    let snappedGeopointsJson = JSON.parse(JSON.stringify(snappedJson));
+    console.log(typeof (snappedGeopointsJson))
+
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
     });
@@ -61,18 +67,16 @@ const Map = (prop) => {
                         width: "95%"
                     }}
                 >
-                    {usersPath.map((geopoint, index) =>
-                    (<Marker
-                        position={{ lat: geopoint.lat, lng: geopoint.lng, key: index }}
-                    />))}
-                    {/* <Marker
-                        position={{ lat: 1.3521, lng: 103.8198 }}
-
-                    /> */}
-                    <Polyline
-                        path={usersPath}
+                    <ul>
+                        {usersPath.map((geopoint, index) =>
+                        (<Marker
+                            position={{ lat: geopoint.lat, lng: geopoint.lng, key: index }}
+                        />))}
+                    </ul>
+                    {/* <Polyline
+                        path={snappedGeopointsJson}
                         options={options}
-                    />
+                    /> */}
                 </GoogleMap>
             </div>
         );

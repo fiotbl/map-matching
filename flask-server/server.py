@@ -27,11 +27,11 @@ def convert_request(response):
                         indiv_geopoints['lat'] = location_value
                     elif location_key == "longitude":
                         indiv_geopoints['lng'] = location_value
-                    print(location_key, location_value)
+                    # print(location_key, location_value)
                 geopoints_list.append(indiv_geopoints)
     return geopoints_list
 
-@app.route('/result', methods = ['POST'])
+@app.route('/result', methods = ['POST', 'GET'])
 def result():
     geopoints = request.json
     path = ""
@@ -49,6 +49,8 @@ def result():
         headers = {}
         response = requests.request("GET", url, headers=headers, data=payload)
         geopoints_list = convert_request(response)
+
+        print(geopoints_list)
         return str(geopoints_list)
 
     return "No geopoints receieved"
