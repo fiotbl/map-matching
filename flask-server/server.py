@@ -24,9 +24,9 @@ def convert_request(response):
                 indiv_geopoints = {}
                 for location_key, location_value in value.items():
                     if location_key == "latitude":
-                        indiv_geopoints['lat'] = location_value
+                        indiv_geopoints["lat"] = location_value
                     elif location_key == "longitude":
-                        indiv_geopoints['lng'] = location_value
+                        indiv_geopoints["lng"] = location_value
                     # print(location_key, location_value)
                 geopoints_list.append(indiv_geopoints)
     return geopoints_list

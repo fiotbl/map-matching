@@ -46,11 +46,23 @@ const Map = (prop) => {
         console.log(usersPath)
     }
 
+    let snappedGeopointsJson;
+
+    if (prop.snappedJson !== undefined) {
+        let snappedJson = prop.snappedJson
+        snappedJson = snappedJson.replace(/'/g, '"')
+        console.log(snappedJson)
+        snappedGeopointsJson = JSON.parse(snappedJson);
+        console.log(typeof (snappedGeopointsJson))
+    }
+
+
+
     // let snappedGeopointsJson = JSON.parse(prop.snappedJson)
     // console.log(prop.snappedJson)
-    let snappedJson = prop.snappedJson
-    let snappedGeopointsJson = JSON.parse(JSON.stringify(snappedJson));
-    console.log(typeof (snappedGeopointsJson))
+
+    // let snappedGeopointsJson = JSON.parse(JSON.stringify(snappedJson));
+    // console.log(typeof (snappedGeopointsJson))
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
@@ -73,10 +85,10 @@ const Map = (prop) => {
                             position={{ lat: geopoint.lat, lng: geopoint.lng, key: index }}
                         />))}
                     </ul>
-                    {/* <Polyline
+                    <Polyline
                         path={snappedGeopointsJson}
                         options={options}
-                    /> */}
+                    />
                 </GoogleMap>
             </div>
         );
