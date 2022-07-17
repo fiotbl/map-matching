@@ -5,32 +5,42 @@ import "./UserInput.css";
 const UserInput = (prop) => {
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
+    const [isFileSubmit, setIsFileSubmit] = useState(false);
     const [fileContent, setFileContent] = useState();
     const [snappedGeopoints, setSnappedGeopoints] = useState("");
 
-    let fileReader;
-
-    const fileInputHandler = (event) => {
-        setSelectedFile(event.target.files[0]);
+    const fileInputHandler = (file) => {
+        setSelectedFile(file);
         setIsFilePicked(true);
+        let fileData = new FileReader();
+        fileData.onloadend = handleFile;
+        fileData.readAsText(file);
     };
 
-
-    const handleFileRead = (e) => {
-        const content = fileReader.result;
+    const handleFile = (e) => {
+        const content = e.target.result;
+        console.log('file content', content)
         setFileContent(JSON.parse(content));
+        // You can set content in state and show it in render.
     }
+
+    // const handleFileRead = (e) => {
+    //     const content = fileReader.result;
+    //     setFileContent(JSON.parse(content));
+    // }
 
     const handleSubmission = () => {
         console.log(selectedFile)
-        try {
-            fileReader = new FileReader()
-            fileReader.onloadend = handleFileRead;
-            fileReader.readAsText(selectedFile)
-            console.log(fileContent)
-        } catch (error) {
-            console.log(error)
-        }
+        setIsFileSubmit(true);
+
+        // try {
+        //     let fileReader = new FileReader()
+        //     fileReader.onloadend = handleFileRead;
+        //     fileReader.readAsText(JSON.parse(fileReader.result))
+        //     console.log(fileReader.result)
+        // } catch (error) {
+        //     console.log(error)
+        // }
         prop.onSetRawJson(fileContent)
 
     };
@@ -55,14 +65,15 @@ const UserInput = (prop) => {
             console.log(snappedGeopoints)
         })
             .catch(error => console.warn(error));
-    }, [fileContent])
+    }, [isFileSubmit])
 
 
     return (
         <div className="mainInput">
             <div className="fileInputDiv" >
                 Upload JSON file
-                <input type="file" className="fileInput" onChange={fileInputHandler} />
+                <input type="file" className="fileInput" onChange={e =>
+                    fileInputHandler(e.target.files[0])} />
             </div>
 
             {isFilePicked ? (

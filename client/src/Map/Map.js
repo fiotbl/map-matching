@@ -61,9 +61,9 @@ const Map = (prop) => {
                         width: "95%"
                     }}
                 >
-                    {usersPath.map((geopoint) =>
+                    {usersPath.map((geopoint, index) =>
                     (<Marker
-                        position={{ lat: geopoint.lat, lng: geopoint.lng }}
+                        position={{ lat: geopoint.lat, lng: geopoint.lng, key: index }}
                     />))}
                     {/* <Marker
                         position={{ lat: 1.3521, lng: 103.8198 }}
