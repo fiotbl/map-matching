@@ -46,12 +46,13 @@ const UserInput = (prop) => {
         }
         ).then((response) => response.text()
         ).then((responseData) => {
-            setSnappedGeopoints(responseData)
+            setSnappedGeopoints(JSON.stringify(responseData))
             console.log(snappedGeopoints)
+            console.log("Ran")
             prop.OnSetSnappedGeopoints(snappedGeopoints)
         })
             .catch(error => console.warn(error));
-    }, [isFileSubmit, fileContent])
+    }, [isFileSubmit])
 
 
     return (

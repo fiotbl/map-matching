@@ -25,6 +25,7 @@ const options = {
 const Map = (prop) => {
     let usersPath = []
     if (prop.rawJson !== undefined) {
+        console.log("entered first")
         let rawJson = prop.rawJson
         let rawGeopoints = rawJson[Object.keys(rawJson)[0]];
         console.log(rawGeopoints);
@@ -47,22 +48,18 @@ const Map = (prop) => {
     }
 
     let snappedGeopointsJson;
+    console.log(prop.snappedJson)
+    console.log(prop.rawJson)
 
-    if (prop.snappedJson !== undefined) {
+    if (prop.snappedJson !== undefined && prop.snappedJson !== "") {
+        console.log("entered")
+        console.log(prop.snappedJson)
         let snappedJson = prop.snappedJson
         snappedJson = snappedJson.replace(/'/g, '"')
         console.log(snappedJson)
         snappedGeopointsJson = JSON.parse(snappedJson);
         console.log(typeof (snappedGeopointsJson))
     }
-
-
-
-    // let snappedGeopointsJson = JSON.parse(prop.snappedJson)
-    // console.log(prop.snappedJson)
-
-    // let snappedGeopointsJson = JSON.parse(JSON.stringify(snappedJson));
-    // console.log(typeof (snappedGeopointsJson))
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
