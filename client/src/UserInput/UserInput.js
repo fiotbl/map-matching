@@ -31,8 +31,9 @@ const UserInput = (prop) => {
     };
 
     const handleClear = () => {
-        setSelectedFile();
-        setIsFilePicked(false);
+        // setSelectedFile();
+        // setIsFilePicked(false);
+        setIsFileSubmit(false);
     };
 
     useEffect(() => {
@@ -44,21 +45,26 @@ const UserInput = (prop) => {
                 'Accept': 'application/json, text/plain, */*',
             },
             body: JSON.stringify(fileContent)
-        }
-        ).then(
-            (response) => {
-                console.log(response)
-                response.text()
-            }
-        ).then((responseData) => {
-            console.log("responseData", responseData)
-
-            setSnappedGeopoints(responseData)
-            console.log(snappedGeopoints)
-            console.log("Ran")
-            prop.OnSetSnappedGeopoints(snappedGeopoints)
+        }).then(() => {
+            console.log("Posted")
         })
-            .catch(error => console.warn(error));
+
+        fetch('/result').then(
+            response => {
+                console.log(response.text())
+                // response.text()
+            }
+
+        )
+        // .then((responseData) => {
+        //     console.log("responseData", responseData)
+
+        //     setSnappedGeopoints(responseData)
+        //     console.log(snappedGeopoints)
+        //     console.log("Ran")
+        //     prop.OnSetSnappedGeopoints(snappedGeopoints)
+        // })
+        //     .catch(error => console.warn(error));
     }, [isFileSubmit])
 
 
