@@ -28,28 +28,24 @@ const Map = (prop) => {
         console.log("entered first")
         let rawJson = prop.rawJson
         let rawGeopoints = rawJson[Object.keys(rawJson)[0]];
-        console.log(rawGeopoints);
 
         for (const [key, value] of Object.entries(rawGeopoints)) {
             let dictJson = {}
             for (const [key_geopoint, value_geopoint] of Object.entries(value)) {
                 if (key_geopoint === "lat") {
                     dictJson[key_geopoint] = value_geopoint;
-                    console.log(dictJson);
                 }
                 else if (key_geopoint === "lng") {
                     dictJson[key_geopoint] = value_geopoint;
-                    console.log(dictJson);
                 }
             }
             usersPath.push(dictJson);
         }
-        console.log(usersPath)
+        // console.log(usersPath)
     }
 
     let snappedGeopointsJson;
     console.log(prop.snappedJson)
-    console.log(prop.rawJson)
 
     if (prop.snappedJson !== undefined && prop.snappedJson !== "") {
         console.log("entered")

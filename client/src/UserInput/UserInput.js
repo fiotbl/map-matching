@@ -41,12 +41,19 @@ const UserInput = (prop) => {
             cache: "no-cache",
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json, text/plain, */*',
             },
             body: JSON.stringify(fileContent)
         }
-        ).then((response) => response.text()
+        ).then(
+            (response) => {
+                console.log(response)
+                response.text()
+            }
         ).then((responseData) => {
-            setSnappedGeopoints(JSON.stringify(responseData))
+            console.log("responseData", responseData)
+
+            setSnappedGeopoints(responseData)
             console.log(snappedGeopoints)
             console.log("Ran")
             prop.OnSetSnappedGeopoints(snappedGeopoints)
