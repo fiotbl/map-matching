@@ -37,25 +37,25 @@ const UserInput = (prop) => {
     };
 
     useEffect(() => {
-        fetch("/result", {
-            method: "POST",
-            cache: "no-cache",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json, text/plain, */*',
-            },
-            body: JSON.stringify(fileContent)
-        }).then(() => {
-            console.log("Posted")
-        })
+        // fetch("/result", {
+        //     method: "POST",
+        //     cache: "no-cache",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json, text/plain, */*',
+        //     },
+        //     body: JSON.stringify(fileContent)
+        // }).then(() => {
+        //     console.log("Posted")
+        // })
 
-        fetch('/result').then(
-            response => {
-                console.log(response.text())
-                // response.text()
-            }
+        // fetch('/result').then(
+        //     response => {
+        //         console.log(response.text())
+        //         // response.text()
+        //     }
 
-        )
+        // )
         // .then((responseData) => {
         //     console.log("responseData", responseData)
 
