@@ -14,3 +14,6 @@ const RawGeopointSchema = new mongoose.Schema({
         required: true,
     },
 })
+
+const RawGeopointModel = mongoose.model("raw-geopoints", RawGeopointSchema)
+module.exports = RawGeopointModel;
