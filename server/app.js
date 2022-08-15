@@ -8,6 +8,7 @@ require("dotenv").config();
 
 // app
 const app = express();
+app.use(express.json())
 
 // mongoDB
 mongoose
@@ -16,7 +17,6 @@ mongoose
         useUnifiedTopology: true,
     }).then(() => console.log('DB Connected!'))
     .catch(err => console.log('DB connection error', err))
-// mongoose.connect("mongodb+srv://fiora1:fiora123@cluster0.lpo8q.mongodb.net/?retryWrites=true&w=majority")
 
 // middleware
 app.use(morgan("dev"))
@@ -26,7 +26,7 @@ app.use(cors({ origin: true, credentials: true }));
 // const testRoutes = require("./routes/test")
 // app.use("/", testRoutes)
 
-app.get("/getRawGeopoint", (req, res) => {
+app.get("/getRawGeopoints", (req, res) => {
     RawGeopointsModel.find({}, (err, result) => {
         if (err) {
             res.json(err)
@@ -34,6 +34,14 @@ app.get("/getRawGeopoint", (req, res) => {
             res.json(result)
         }
     })
+})
+
+app.post("/createRawGeopoints", async (req, res) => {
+    const geopoint = req.body;
+    const newGeopoint = new RawGeopointsModel(geopoint);
+    await newGeopoint.save();
+
+    res.json(geopoint)
 })
 
 // port
