@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import "./UserInput.css";
+import Axios from "axios";
 
 const UserInput = (prop) => {
     const [selectedFile, setSelectedFile] = useState();
@@ -27,8 +28,23 @@ const UserInput = (prop) => {
         console.log(selectedFile)
         setIsFileSubmit(true);
         prop.onSetRawJson(fileContent)
+        console.log("HERHFENJRF", fileContent[Object.keys(fileContent)[0]])
+        const postData = fileContent[Object.keys(fileContent)[0]]
+
+        for (let i = 0; i < postData.length; i++) {
+            Axios.post("http://localhost:8080/createRawGeopoints", {
+                time: postData[i].time,
+                lat: postData[i].lat,
+                lng: postData[i].lng
+            }).then((response) => {
+                alert("Added raw geopoints")
+            });
+        }
+
 
     };
+
+
 
     const handleClear = () => {
         // setSelectedFile();
