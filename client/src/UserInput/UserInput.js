@@ -20,15 +20,12 @@ const UserInput = (prop) => {
 
     const handleFile = (e) => {
         const content = e.target.result;
-        console.log('file content', content)
         setFileContent(JSON.parse(content));
     }
 
     const handleSubmission = () => {
-        console.log(selectedFile)
         setIsFileSubmit(true);
         prop.onSetRawJson(fileContent)
-        console.log("HERHFENJRF", fileContent[Object.keys(fileContent)[0]])
         const postData = fileContent[Object.keys(fileContent)[0]]
 
         for (let i = 0; i < postData.length; i++) {
@@ -37,13 +34,12 @@ const UserInput = (prop) => {
                 lat: postData[i].lat,
                 lng: postData[i].lng
             }).then((response) => {
-                alert("Added raw geopoints")
+                // alert("Added raw geopoints")
             });
         }
 
-
+        // insert get req - gets data from db, run calulcation and save into new snapped geopoints model
     };
-
 
 
     const handleClear = () => {
