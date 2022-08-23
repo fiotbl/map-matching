@@ -9,6 +9,7 @@ const UserInput = (prop) => {
     const [isFileSubmit, setIsFileSubmit] = useState(false);
     const [fileContent, setFileContent] = useState();
     const [snappedGeopoints, setSnappedGeopoints] = useState("");
+    const [snappedResponse, setSnappedResponse] = useState("");
 
     const fileInputHandler = (file) => {
 
@@ -50,6 +51,37 @@ const UserInput = (prop) => {
             setSnappedGeopoints(response.data)
         });
         console.log(snappedGeopoints)
+        var path = ""
+        const googleurl = "https://roads.googleapis.com/v1/snapToRoads?path="
+        const interpolate = "&interpolate=true&key="
+        const googleMapsApiKey = process.env.REACT_APP_GOOGLE_API_KEY
+        const geopointsList = []
+        for (let i = 0; i < snappedGeopoints.length; i++) {
+            console.log(snappedGeopoints[i].time)
+            console.log(snappedGeopoints[i].lat)
+            console.log(snappedGeopoints[i].lng)
+            path += String(snappedGeopoints[i].lat) + "," + String(snappedGeopoints[i].lng) + "|"
+        }
+        console.log(path)
+        var url = googleurl + path.slice(0, -1) + interpolate + googleMapsApiKey
+
+        var axios = require('axios');
+
+        var config = {
+            method: 'get',
+            url: url,
+            headers: {}
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(response.data);
+                // setSnappedResponse()
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
     };
 
     const handleClear = () => {
