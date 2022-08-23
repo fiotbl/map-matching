@@ -11,11 +11,15 @@ const UserInput = (prop) => {
     const [snappedGeopoints, setSnappedGeopoints] = useState("");
 
     const fileInputHandler = (file) => {
+
         setSelectedFile(file);
         setIsFilePicked(true);
         let fileData = new FileReader();
         fileData.onloadend = handleFile;
         fileData.readAsText(file);
+        console.log("here", isFilePicked);
+
+
     };
 
     const handleFile = (e) => {
@@ -41,11 +45,20 @@ const UserInput = (prop) => {
         // insert get req - gets data from db, run calulcation and save into new snapped geopoints model
     };
 
+    const handleMapMatch = () => {
+        Axios.get("http://localhost:8080/getRawGeopoints").then((response) => {
+            setSnappedGeopoints(response.data)
+        });
+        console.log(snappedGeopoints)
+    };
 
     const handleClear = () => {
         // setSelectedFile();
         // setIsFilePicked(false);
-        setIsFileSubmit(false);
+        // setIsFileSubmit(false);
+        // fileInputHandler(null);
+        // prop.onSetRawJson(null);
+
     };
 
     useEffect(() => {
@@ -104,6 +117,7 @@ const UserInput = (prop) => {
             <div>
                 <button onClick={handleSubmission}>Submit</button>
                 <button onClick={handleClear}>Clear</button>
+                <button onClick={handleMapMatch}>Map Match!</button>
             </div>
         </div>
     )
