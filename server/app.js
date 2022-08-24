@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 const RawGeopointsModel = require('./models/RawGeopoints')
+const SnappedGeopointsModel = require('./models/SnappedGeopoints')
 require("dotenv").config();
 
 // app
@@ -40,9 +41,16 @@ app.post("/createRawGeopoints", async (req, res) => {
     const geopoint = req.body;
     const newGeopoint = new RawGeopointsModel(geopoint);
     await newGeopoint.save();
-
     res.json(geopoint)
 })
+
+app.post("/createSnappedGeopoints", async (req, res) => {
+    const snappedGeopoint = req.body;
+    const newSnappedGeopoint = new SnappedGeopointsModel(snappedGeopoint);
+    await newSnappedGeopoint.save();
+    res.json(snappedGeopoint)
+})
+
 
 // port
 const port = process.env.port || 8080;

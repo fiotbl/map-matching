@@ -75,12 +75,27 @@ const UserInput = (prop) => {
 
         axios(config)
             .then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
+                console.log(response.data[Object.keys(response.data)[0]])
+                const snappedPoints = response.data[Object.keys(response.data)[0]]
+                for (let i = 0; i < snappedPoints.length; i++) {
+                    Axios.post("http://localhost:8080/createSnappedGeopoints", {
+                        lat: snappedPoints[i].location.latitude,
+                        lng: snappedPoints[i].location.longitude,
+                    }).then((response) => {
+                        // alert("Added raw geopoints")
+                    });
+                }
+                // setSnappedGeopoints(response.data[Object.keys(response.data)[0]])
+                // console.log(snappedGeopoints)
                 // setSnappedResponse()
+
             })
             .catch(function (error) {
                 console.log(error);
             });
+
+
 
     };
 
