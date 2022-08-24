@@ -51,6 +51,16 @@ app.post("/createSnappedGeopoints", async (req, res) => {
     res.json(snappedGeopoint)
 })
 
+app.get("/getSnappedGeopoints", (req, res) => {
+    SnappedGeopointsModel.find({}, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(result)
+        }
+    })
+})
+
 
 // port
 const port = process.env.port || 8080;

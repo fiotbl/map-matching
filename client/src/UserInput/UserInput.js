@@ -8,8 +8,8 @@ const UserInput = (prop) => {
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [isFileSubmit, setIsFileSubmit] = useState(false);
     const [fileContent, setFileContent] = useState();
-    const [snappedGeopoints, setSnappedGeopoints] = useState("");
-    const [snappedResponse, setSnappedResponse] = useState("");
+    const [snappedGeopoints, setSnappedGeopoints] = useState();
+    const [rawGeopoints, setRawGeopoints] = useState("");
 
     const fileInputHandler = (file) => {
 
@@ -48,19 +48,19 @@ const UserInput = (prop) => {
 
     const handleMapMatch = () => {
         Axios.get("http://localhost:8080/getRawGeopoints").then((response) => {
-            setSnappedGeopoints(response.data)
+            setRawGeopoints(response.data)
         });
-        console.log(snappedGeopoints)
+        // console.log(snappedGeopoints)
         var path = ""
         const googleurl = "https://roads.googleapis.com/v1/snapToRoads?path="
         const interpolate = "&interpolate=true&key="
         const googleMapsApiKey = process.env.REACT_APP_GOOGLE_API_KEY
         const geopointsList = []
-        for (let i = 0; i < snappedGeopoints.length; i++) {
-            console.log(snappedGeopoints[i].time)
-            console.log(snappedGeopoints[i].lat)
-            console.log(snappedGeopoints[i].lng)
-            path += String(snappedGeopoints[i].lat) + "," + String(snappedGeopoints[i].lng) + "|"
+        for (let i = 0; i < rawGeopoints.length; i++) {
+            console.log(rawGeopoints[i].time)
+            console.log(rawGeopoints[i].lat)
+            console.log(rawGeopoints[i].lng)
+            path += String(rawGeopoints[i].lat) + "," + String(rawGeopoints[i].lng) + "|"
         }
         console.log(path)
         var url = googleurl + path.slice(0, -1) + interpolate + googleMapsApiKey
@@ -86,16 +86,17 @@ const UserInput = (prop) => {
                         // alert("Added raw geopoints")
                     });
                 }
-                // setSnappedGeopoints(response.data[Object.keys(response.data)[0]])
-                // console.log(snappedGeopoints)
-                // setSnappedResponse()
-
             })
             .catch(function (error) {
                 console.log(error);
             });
 
+        Axios.get("http://localhost:8080/getSnappedGeopoints").then((response) => {
+            setSnappedGeopoints(response.data)
+        });
 
+        console.log(snappedGeopoints)
+        prop.OnSetSnappedGeopoints(snappedGeopoints)
 
     };
 

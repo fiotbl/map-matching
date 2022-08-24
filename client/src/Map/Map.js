@@ -51,9 +51,10 @@ const Map = (prop) => {
         console.log("entered")
         console.log(prop.snappedJson)
         let snappedJson = prop.snappedJson
-        snappedJson = snappedJson.replace(/'/g, '"')
-        console.log(snappedJson)
-        snappedGeopointsJson = JSON.parse(snappedJson);
+        // snappedJson = snappedJson.replace(/'/g, '"')
+        // console.log(snappedJson)
+        // snappedGeopointsJson = JSON.parse(snappedJson);
+        snappedGeopointsJson = snappedJson;
         console.log(typeof (snappedGeopointsJson))
     }
 
