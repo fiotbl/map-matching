@@ -6,6 +6,7 @@ import Axios from "axios";
 const UserInput = (prop) => {
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
+    const [isSnapped, setIsSnapped] = useState(false);
     const [isFileSubmit, setIsFileSubmit] = useState(false);
     const [fileContent, setFileContent] = useState();
     const [snappedGeopoints, setSnappedGeopoints] = useState();
@@ -28,6 +29,15 @@ const UserInput = (prop) => {
         setFileContent(JSON.parse(content));
     }
 
+    const getData = async () => {
+        const { data } = await Axios.get("http://localhost:8080/getRawGeopoints");
+        setRawGeopoints(data)
+    };
+
+    useEffect(() => {
+        getData();
+    }, [isFileSubmit]);
+
     const handleSubmission = () => {
         setIsFileSubmit(true);
         prop.onSetRawJson(fileContent)
@@ -46,11 +56,11 @@ const UserInput = (prop) => {
         // insert get req - gets data from db, run calulcation and save into new snapped geopoints model
     };
 
-    const handleMapMatch = () => {
-        Axios.get("http://localhost:8080/getRawGeopoints").then((response) => {
-            setRawGeopoints(response.data)
-        });
-        // console.log(snappedGeopoints)
+    const handleMapMatch = async () => {
+        // Axios.get("http://localhost:8080/getRawGeopoints").then((response) => {
+        //     console.log("checking", response.data)
+        //     setRawGeopoints(response.data)
+        // });
         var path = ""
         const googleurl = "https://roads.googleapis.com/v1/snapToRoads?path="
         const interpolate = "&interpolate=true&key="
@@ -83,7 +93,7 @@ const UserInput = (prop) => {
                         lat: snappedPoints[i].location.latitude,
                         lng: snappedPoints[i].location.longitude,
                     }).then((response) => {
-                        // alert("Added raw geopoints")
+                        // console.log(response.data);
                     });
                 }
             })
@@ -91,14 +101,30 @@ const UserInput = (prop) => {
                 console.log(error);
             });
 
-        Axios.get("http://localhost:8080/getSnappedGeopoints").then((response) => {
+        await Axios.get("http://localhost:8080/getSnappedGeopoints").then((response) => {
             setSnappedGeopoints(response.data)
         });
 
         console.log(snappedGeopoints)
         prop.OnSetSnappedGeopoints(snappedGeopoints)
 
+        // setIsSnapped(true);
+        // console.log(snappedGeopoints)
+
+
     };
+
+    const getSnappedData = async () => {
+        const { data } = await Axios.get("http://localhost:8080/getSnappedGeopoints");
+        setSnappedGeopoints(data);
+        console.log("here", snappedGeopoints)
+    };
+
+    useEffect(() => {
+        getSnappedData();
+        console.log("here 2", snappedGeopoints)
+        prop.OnSetSnappedGeopoints(snappedGeopoints)
+    }, [isSnapped]);
 
     const handleClear = () => {
         // setSelectedFile();
