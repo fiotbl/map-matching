@@ -3,7 +3,7 @@ import Map from "./Map/Map";
 import UserInput from "./UserInput/UserInput";
 import "./App.css";
 import logo from "./TitleImg.png";
-import { Card, CardContent } from "@material-ui/core";
+import { Card, CardContent, CardActions } from "@material-ui/core";
 
 // functions
 import { getTest } from "./Functions/test";
@@ -38,14 +38,15 @@ function App() {
           <img src={logo} height="40" width="40" />
           <h1>Map Match</h1>
         </div>
-        <Card style={{ width: 400 }}>
-          <CardContent>HELLO</CardContent>
+        <Card style={{ width: 400, backgroundColor: "#c9e4caff" }}>
+          <CardContent>Upload GPS Data (JSON Format): </CardContent>
+          <CardActions>
+            <UserInput
+              onSetRawJson={setRawJsonHandler}
+              OnSetSnappedGeopoints={setSnappedGeopoints}
+            />
+          </CardActions>
         </Card>
-        <UserInput
-          onSetRawJson={setRawJsonHandler}
-          OnSetSnappedGeopoints={setSnappedGeopoints}
-        />
-        {/* <h1> {test}</h1> */}
       </div>
       <div className="Map">
         <Map rawJson={rawJson} snappedJson={snappedJson} />
