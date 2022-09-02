@@ -1,3 +1,7 @@
+/* #root > div > div {
+  display: inline-block;
+} */
+
 html,
 body {
   height: 100%;
@@ -16,6 +20,9 @@ body {
   width: 50vh;
   border-right: 2px solid rgb(73, 73, 73);
   background-color: #87bba2ff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .Title {
@@ -30,6 +37,6 @@ h1 {
 .Title img {
   /* float: left; */
   padding-top: 1rem;
-  padding-left: 7rem;
+  padding-left: 1rem;
   padding-right: 1rem;
 }

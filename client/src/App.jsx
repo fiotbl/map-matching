@@ -38,7 +38,7 @@ function App() {
           <img src={logo} height="40" width="40" />
           <h1>Map Match</h1>
         </div>
-        <Card style={{ display: "inline-block", width: 1 / 2 }}>
+        <Card style={{ width: 400 }}>
           <CardContent>HELLO</CardContent>
         </Card>
         <UserInput
