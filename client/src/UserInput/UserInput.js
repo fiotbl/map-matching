@@ -175,11 +175,11 @@ const UserInput = (prop) => {
 
             {isFilePicked ? (
                 <div>
-                    <p>Filename: {selectedFile.name}</p>
-                    <p>Filetype: {selectedFile.type}</p>
-                    <p>Size in bytes: {selectedFile.size}</p>
+                    <p>File Name: {selectedFile.name}</p>
+                    {/* <p>Filetype: {selectedFile.type}</p> */}
+                    <p>File Size (bytes): {selectedFile.size}</p>
                     <p>
-                        lastModifiedDate:{' '}
+                        File Last Modified Date:{' '}
                         {selectedFile.lastModifiedDate.toLocaleDateString()}
                     </p>
                 </div>

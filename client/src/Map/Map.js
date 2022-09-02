@@ -70,7 +70,7 @@ const Map = (prop) => {
                     zoom={12}
                     mapContainerStyle={{
                         height: "900px",
-                        width: "95%"
+                        width: "100%"
                     }}
                 >
                     <ul>
