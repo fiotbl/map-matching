@@ -1,20 +1,24 @@
 import React from 'react'
-import { Card, CardContent, CardActions, Button } from "@material-ui/core";
+import { Button, Box } from "@material-ui/core";
+import "./ButtonBar.css";
 
 const ButtonBar = () => {
     return (
-        <div>
-            <Button variant="contained" style={{
-                backgroundColor: "#55828bff",
-            }} component="span">
-                Submit
-            </Button>
-            <Button variant="contained" style={{
-                backgroundColor: "#55828bff",
-            }} component="span">
-                Map Match!
-            </Button>
+        <div className="ButtonBar">
+            <Box display="flex" justifyContent="space-between">
+                <Button id="submitBtn" variant="contained" style={{
+                    backgroundColor: "#55828bff",
+                }} component="span">
+                    Submit
+                </Button>
+                <Button variant="contained" style={{
+                    backgroundColor: "#55828bff",
+                }} component="span">
+                    Map Match!
+                </Button>
+            </Box>
         </div>
+
     )
 }
 
