@@ -16,6 +16,7 @@ function App() {
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [fileContent, setFileContent] = useState();
   const [selectedFile, setSelectedFile] = useState();
+  const [sendDataToMap, setSendDataToMap] = useState(false);
 
   const setIsFilePickedHandler = (isPicked) => {
     setIsFilePicked(isPicked);
@@ -30,6 +31,16 @@ function App() {
   const setSelectedFileHandler = (file) => {
     setSelectedFile(file);
     console.log(file);
+  };
+
+  const setSendDataToMapHandler = (sendData) => {
+    setSendDataToMap(sendData);
+    console.log(sendData);
+  };
+
+  const setRawJsonHandler = (rawJson) => {
+    setRawJson(rawJson);
+    console.log(rawJson);
   };
 
   const setSnappedGeopoints = (snappedGeopoints) => {
@@ -56,13 +67,15 @@ function App() {
           onSetIsFilePicked={setIsFilePickedHandler}
           onSetFileContent={setFileContentHandler}
           onSetSelectedFile={setSelectedFileHandler}
+          onSetRawJsonHandler={setRawJsonHandler}
+          sendDataToMap={sendDataToMap}
         />
         <FileInformation
           isFilePicked={isFilePicked}
           fileContent={fileContent}
           selectedFile={selectedFile}
         />
-        <ButtonBar />
+        <ButtonBar onSetSendDataToMap={setSendDataToMapHandler} />
       </div>
       <div className="Map">
         <Map rawJson={rawJson} snappedJson={snappedJson} />

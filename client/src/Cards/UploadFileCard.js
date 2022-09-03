@@ -6,6 +6,10 @@ import { Card, CardContent, CardActions, Button } from "@material-ui/core";
 const UploadFileCard = (props) => {
     const [fileContent, setFileContent] = useState();
 
+    useEffect(() => {
+        props.onSetRawJsonHandler(fileContent)
+    }, [props.sendDataToMap]);
+
     const fileInputHandler = (file) => {
         props.onSetSelectedFile(file);
         props.onSetIsFilePicked(true);
