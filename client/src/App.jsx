@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Map from "./Map/Map";
 import UserInput from "./UserInput/UserInput";
+import UploadFileCard from "./Cards/UploadFileCard";
 import "./App.css";
 import logo from "./TitleImg.png";
 import { Card, CardContent, CardActions } from "@material-ui/core";
@@ -38,7 +39,8 @@ function App() {
           <img src={logo} height="40" width="40" />
           <h1>Map Match</h1>
         </div>
-        <Card style={{ width: 400, backgroundColor: "#c9e4caff" }}>
+        <UploadFileCard></UploadFileCard>
+        {/* <Card style={{ width: 400, backgroundColor: "#c9e4caff" }}>
           <CardContent>Upload GPS Data (JSON Format): </CardContent>
           <CardActions>
             <UserInput
@@ -46,7 +48,7 @@ function App() {
               OnSetSnappedGeopoints={setSnappedGeopoints}
             />
           </CardActions>
-        </Card>
+        </Card> */}
       </div>
       <div className="Map">
         <Map rawJson={rawJson} snappedJson={snappedJson} />
