@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Map from "./Map/Map";
 import UserInput from "./UserInput/UserInput";
 import UploadFileCard from "./Cards/UploadFileCard";
+import FileInformation from "./Cards/FileInformation";
 import "./App.css";
 import logo from "./TitleImg.png";
 import { Card, CardContent, CardActions } from "@material-ui/core";
@@ -13,10 +14,23 @@ function App() {
   const [rawJson, setRawJson] = useState();
   const [snappedJson, setSnappedJson] = useState();
   // const [test, setTest] = useState("Initial Value");
+  const [isFilePicked, setIsFilePicked] = useState(false);
+  const [fileContent, setFileContent] = useState();
+  const [selectedFile, setSelectedFile] = useState();
 
-  const setRawJsonHandler = (geopoints) => {
-    setRawJson(geopoints);
-    console.log(geopoints);
+  const setIsFilePickedHandler = (isPicked) => {
+    setIsFilePicked(isPicked);
+    console.log(isPicked);
+  };
+
+  const setFileContentHandler = (fileContent) => {
+    setFileContent(fileContent);
+    console.log(fileContent);
+  };
+
+  const setSelectedFileHandler = (file) => {
+    setSelectedFile(file);
+    console.log(file);
   };
 
   const setSnappedGeopoints = (snappedGeopoints) => {
@@ -39,7 +53,16 @@ function App() {
           <img src={logo} height="40" width="40" />
           <h1>Map Match</h1>
         </div>
-        <UploadFileCard></UploadFileCard>
+        <UploadFileCard
+          onSetIsFilePicked={setIsFilePickedHandler}
+          onSetFileContent={setFileContentHandler}
+          onSetSelectedFile={setSelectedFileHandler}
+        ></UploadFileCard>
+        <FileInformation
+          isFilePicked={isFilePicked}
+          fileContent={fileContent}
+          selectedFile={selectedFile}
+        ></FileInformation>
         {/* <Card style={{ width: 400, backgroundColor: "#c9e4caff" }}>
           <CardContent>Upload GPS Data (JSON Format): </CardContent>
           <CardActions>
