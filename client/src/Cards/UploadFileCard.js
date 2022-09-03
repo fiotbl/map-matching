@@ -4,10 +4,7 @@ import { Card, CardContent, CardActions, Button } from "@material-ui/core";
 
 
 const UploadFileCard = (props) => {
-    const [selectedFile, setSelectedFile] = useState();
     const [fileContent, setFileContent] = useState();
-    const [isFilePicked, setIsFilePicked] = useState(false);
-
 
     const fileInputHandler = (file) => {
         props.onSetSelectedFile(file);
@@ -42,7 +39,9 @@ const UploadFileCard = (props) => {
                             fileInputHandler(e.target.files[0])}
                     />
                     <label htmlFor="contained-button-file">
-                        <Button variant="contained" color="primary" component="span">
+                        <Button variant="contained" style={{
+                            backgroundColor: "#0000000",
+                        }} component="span">
                             Upload
                         </Button>
                     </label>

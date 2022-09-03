@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import Map from "./Map/Map";
-import UserInput from "./UserInput/UserInput";
 import UploadFileCard from "./Cards/UploadFileCard";
 import FileInformation from "./Cards/FileInformation";
+import ButtonBar from "./Cards/ButtonBar";
 import "./App.css";
 import logo from "./TitleImg.png";
-import { Card, CardContent, CardActions } from "@material-ui/core";
 
 // functions
 import { getTest } from "./Functions/test";
@@ -57,21 +56,13 @@ function App() {
           onSetIsFilePicked={setIsFilePickedHandler}
           onSetFileContent={setFileContentHandler}
           onSetSelectedFile={setSelectedFileHandler}
-        ></UploadFileCard>
+        />
         <FileInformation
           isFilePicked={isFilePicked}
           fileContent={fileContent}
           selectedFile={selectedFile}
-        ></FileInformation>
-        {/* <Card style={{ width: 400, backgroundColor: "#c9e4caff" }}>
-          <CardContent>Upload GPS Data (JSON Format): </CardContent>
-          <CardActions>
-            <UserInput
-              onSetRawJson={setRawJsonHandler}
-              OnSetSnappedGeopoints={setSnappedGeopoints}
-            />
-          </CardActions>
-        </Card> */}
+        />
+        <ButtonBar />
       </div>
       <div className="Map">
         <Map rawJson={rawJson} snappedJson={snappedJson} />
