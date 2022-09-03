@@ -69,14 +69,14 @@ const Map = (prop) => {
                     center={{ lat: 1.3521, lng: 103.8198 }}
                     zoom={12}
                     mapContainerStyle={{
-                        height: "900px",
+                        height: "914px",
                         width: "100%"
                     }}
                 >
                     <ul>
                         {usersPath.map((geopoint, index) =>
                         (<Marker
-                            position={{ lat: geopoint.lat, lng: geopoint.lng, key: index }}
+                            position={{ key: index, lat: geopoint.lat, lng: geopoint.lng }}
                         />))}
                     </ul>
                     <Polyline

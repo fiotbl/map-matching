@@ -37,6 +37,16 @@ app.get("/getRawGeopoints", (req, res) => {
     })
 })
 
+app.delete("/deleteRawGeopoints", (req, res) => {
+    RawGeopointsModel.remove({}, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(result)
+        }
+    })
+})
+
 app.post("/createRawGeopoints", async (req, res) => {
     const geopoint = req.body;
     const newGeopoint = new RawGeopointsModel(geopoint);

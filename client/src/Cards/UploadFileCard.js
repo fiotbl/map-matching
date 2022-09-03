@@ -1,13 +1,36 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardActions, Button } from "@material-ui/core";
+import Axios from "axios";
 
 
 const UploadFileCard = (props) => {
     const [fileContent, setFileContent] = useState();
 
     useEffect(() => {
-        props.onSetRawJsonHandler(fileContent)
+        props.onSetRawJsonHandler(fileContent);
+
+        let deleteData = async () => {
+            await Axios.delete("http://localhost:8080/deleteRawGeopoints").then((response) => {
+                console.log("Deleted All")
+            });
+        }
+
+        deleteData();
+
+        if (fileContent != null) {
+            const postData = fileContent[Object.keys(fileContent)[0]]
+            for (let i = 0; i < postData.length; i++) {
+                Axios.post("http://localhost:8080/createRawGeopoints", {
+                    time: postData[i].time,
+                    lat: postData[i].lat,
+                    lng: postData[i].lng
+                }).then((response) => {
+                    // setIsFileSubmit(true);
+                    console.log("Posted")
+                });
+            }
+        }
     }, [props.sendDataToMap]);
 
     const fileInputHandler = (file) => {
