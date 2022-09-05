@@ -7,16 +7,14 @@ import Axios from "axios";
 const UploadFileCard = (props) => {
     const [fileContent, setFileContent] = useState();
 
-    const deleteData = () => {
-        Axios.delete("http://localhost:8080/deleteRawGeopoints").then((response) => {
+    const deleteData = async () => {
+        await Axios.delete("http://localhost:8080/deleteRawGeopoints").then((response) => {
             console.log("Deleted All")
         });
     }
 
     const postData = async (data) => {
-        await Axios.delete("http://localhost:8080/deleteRawGeopoints").then((response) => {
-            console.log("Deleted All")
-        });
+        await deleteData();
 
         for (let i = 0; i < data.length; i++) {
             Axios.post("http://localhost:8080/createRawGeopoints", {
@@ -28,12 +26,10 @@ const UploadFileCard = (props) => {
                 console.log("Posted")
             });
         }
-
     }
 
     useEffect(() => {
         props.onSetRawJsonHandler(fileContent);
-
         if (fileContent != null) {
             const dataToPost = fileContent[Object.keys(fileContent)[0]]
             postData(dataToPost)

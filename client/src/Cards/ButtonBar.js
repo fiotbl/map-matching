@@ -7,6 +7,10 @@ const ButtonBar = (props) => {
         props.onSetSendDataToMap(true)
     }
 
+    const handleMapMatch = () => {
+        props.onSetHandleMapMatch(true)
+    }
+
     return (
         <div className="ButtonBar">
             <Box display="flex" justifyContent="space-between">
@@ -17,7 +21,7 @@ const ButtonBar = (props) => {
                 </Button>
                 <Button variant="contained" style={{
                     backgroundColor: "#55828bff",
-                }} component="span">
+                }} component="span" onClick={handleMapMatch}>
                     Map Match!
                 </Button>
             </Box>
