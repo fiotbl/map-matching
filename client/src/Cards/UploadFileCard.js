@@ -14,19 +14,20 @@ const UploadFileCard = (props) => {
     }
 
     const postData = async (data) => {
-        Axios.delete("http://localhost:8080/deleteRawGeopoints").then((response) => {
+        await Axios.delete("http://localhost:8080/deleteRawGeopoints").then((response) => {
             console.log("Deleted All")
-            for (let i = 0; i < data.length; i++) {
-                Axios.post("http://localhost:8080/createRawGeopoints", {
-                    time: data[i].time,
-                    lat: data[i].lat,
-                    lng: data[i].lng
-                }).then((response) => {
-                    // setIsFileSubmit(true);
-                    console.log("Posted")
-                });
-            }
         });
+
+        for (let i = 0; i < data.length; i++) {
+            Axios.post("http://localhost:8080/createRawGeopoints", {
+                time: data[i].time,
+                lat: data[i].lat,
+                lng: data[i].lng
+            }).then((response) => {
+                // setIsFileSubmit(true);
+                console.log("Posted")
+            });
+        }
 
     }
 
