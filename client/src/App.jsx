@@ -8,6 +8,7 @@ import logo from "./TitleImg.png";
 
 // functions
 import { getTest } from "./Functions/test";
+import { getSnappedData } from "./Functions/getSnappedData";
 
 function App() {
   const [rawJson, setRawJson] = useState();
@@ -18,6 +19,11 @@ function App() {
   const [selectedFile, setSelectedFile] = useState();
   const [sendDataToMap, setSendDataToMap] = useState(false);
   const [mapMatch, setMapMatch] = useState(false);
+
+  const testCall = async () => {
+    const testData = await getSnappedData();
+    console.log(testData);
+  };
 
   const setIsFilePickedHandler = (isPicked) => {
     setIsFilePicked(isPicked);
@@ -85,6 +91,7 @@ function App() {
           onSetSendDataToMap={setSendDataToMapHandler}
           onSetHandleMapMatch={setHandleMapMatchHandler}
         />
+        <button onClick={testCall}>TEST</button>
       </div>
       <div className="Map">
         <Map rawJson={rawJson} snappedJson={snappedJson} />
