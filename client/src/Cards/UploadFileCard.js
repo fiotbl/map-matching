@@ -7,29 +7,35 @@ import Axios from "axios";
 const UploadFileCard = (props) => {
     const [fileContent, setFileContent] = useState();
 
-    useEffect(() => {
-        props.onSetRawJsonHandler(fileContent);
+    const deleteData = () => {
+        Axios.delete("http://localhost:8080/deleteRawGeopoints").then((response) => {
+            console.log("Deleted All")
+        });
+    }
 
-        let deleteData = async () => {
-            await Axios.delete("http://localhost:8080/deleteRawGeopoints").then((response) => {
-                console.log("Deleted All")
-            });
-        }
-
-        deleteData();
-
-        if (fileContent != null) {
-            const postData = fileContent[Object.keys(fileContent)[0]]
-            for (let i = 0; i < postData.length; i++) {
+    const postData = async (data) => {
+        Axios.delete("http://localhost:8080/deleteRawGeopoints").then((response) => {
+            console.log("Deleted All")
+            for (let i = 0; i < data.length; i++) {
                 Axios.post("http://localhost:8080/createRawGeopoints", {
-                    time: postData[i].time,
-                    lat: postData[i].lat,
-                    lng: postData[i].lng
+                    time: data[i].time,
+                    lat: data[i].lat,
+                    lng: data[i].lng
                 }).then((response) => {
                     // setIsFileSubmit(true);
                     console.log("Posted")
                 });
             }
+        });
+
+    }
+
+    useEffect(() => {
+        props.onSetRawJsonHandler(fileContent);
+
+        if (fileContent != null) {
+            const dataToPost = fileContent[Object.keys(fileContent)[0]]
+            postData(dataToPost)
         }
     }, [props.sendDataToMap]);
 
