@@ -22,6 +22,7 @@ function App() {
 
   const testCall = async () => {
     const testData = await getSnappedData();
+    setSnappedJson(testData);
     console.log(testData);
   };
 
@@ -50,8 +51,10 @@ function App() {
     console.log(rawJson);
   };
 
-  const setHandleMapMatchHandler = (mapMatch) => {
-    setMapMatch(mapMatch);
+  const setHandleMapMatchHandler = async (mapMatch) => {
+    // setMapMatch(mapMatch);
+    const testData = await getSnappedData();
+    setSnappedJson(testData);
     console.log(mapMatch);
   };
 
