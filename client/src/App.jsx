@@ -9,6 +9,7 @@ import logo from "./TitleImg.png";
 // functions
 import { getTest } from "./Functions/test";
 import { getSnappedData } from "./Functions/getSnappedData";
+import { mapMatch } from "./Functions/mapMatch";
 
 function App() {
   const [rawJson, setRawJson] = useState();
@@ -18,7 +19,7 @@ function App() {
   const [fileContent, setFileContent] = useState();
   const [selectedFile, setSelectedFile] = useState();
   const [sendDataToMap, setSendDataToMap] = useState(false);
-  const [mapMatch, setMapMatch] = useState(false);
+  // const [mapMatch, setMapMatch] = useState(false);
 
   const testCall = async () => {
     const testData = await getSnappedData();
@@ -51,11 +52,14 @@ function App() {
     console.log(rawJson);
   };
 
-  const setHandleMapMatchHandler = async (mapMatch) => {
+  const setHandleMapMatchHandler = async () => {
     // setMapMatch(mapMatch);
-    const testData = await getSnappedData();
-    setSnappedJson(testData);
-    console.log(mapMatch);
+    const testRawData = await mapMatch();
+    console.log("here", testRawData);
+
+    const snappedData = await getSnappedData();
+    setSnappedJson(snappedData);
+    // console.log(mapMatch);
   };
 
   const setSnappedGeopoints = (snappedGeopoints) => {
@@ -94,7 +98,6 @@ function App() {
           onSetSendDataToMap={setSendDataToMapHandler}
           onSetHandleMapMatch={setHandleMapMatchHandler}
         />
-        <button onClick={testCall}>TEST</button>
       </div>
       <div className="Map">
         <Map rawJson={rawJson} snappedJson={snappedJson} />
