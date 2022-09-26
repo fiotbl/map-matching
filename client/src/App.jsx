@@ -21,6 +21,8 @@ function App() {
   const [fileContent, setFileContent] = useState();
   const [selectedFile, setSelectedFile] = useState();
   const [sendDataToMap, setSendDataToMap] = useState(false);
+  const [showRawData, setShowRawData] = useState(false);
+
   // const [mapMatch, setMapMatch] = useState(false);
 
   const testCall = async () => {
@@ -67,6 +69,10 @@ function App() {
     console.log(snappedGeopoints);
   };
 
+  const setShowRawDataHandler = () => {
+    setShowRawData(true);
+  };
+
   // useEffect(() => {
   //   getTest()
   //     .then((res) => {
@@ -89,6 +95,7 @@ function App() {
             onSetSelectedFile={setSelectedFileHandler}
             onSetRawJsonHandler={setRawJsonHandler}
             sendDataToMap={sendDataToMap}
+            onSetShowRawData={setShowRawDataHandler}
           />
           <FileInformation
             isFilePicked={isFilePicked}
@@ -101,7 +108,9 @@ function App() {
           />
         </div>
         <div className="OutputData">
-          <DataOutput></DataOutput>
+          <DataOutput
+            showRawData={showRawData}
+          />
         </div>
       </div>
       <div className="Map">

@@ -6,6 +6,10 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+import { getSnappedData } from "../Functions/getSnappedData";
+import { getRawData } from "../Functions/getRawData";
+
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -39,12 +43,26 @@ function a11yProps(index) {
     };
 }
 
-const DataOutput = () => {
-    const [value, setValue] = useState('one');
+const DataOutput = (props) => {
+    const [value, setValue] = useState(0);
+    const [rawData, setRawData] = useState("");
+
+    const getRawDataHelper = async () => {
+        const rawDataFetched = await getRawData();
+        console.log("Raw data fetched", rawDataFetched)
+        setRawData(rawDataFetched);
+    }
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    useEffect(() => {
+        if (props.showRawData) {
+            getRawDataHelper();
+            console.log(rawData);
+        }
+    }, [props.showRawData]);
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -55,7 +73,7 @@ const DataOutput = () => {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                Item One
+                {JSON.stringify(rawData)}
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Item Two

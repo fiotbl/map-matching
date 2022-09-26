@@ -15,24 +15,30 @@ const UploadFileCard = (props) => {
 
     const postData = async (data) => {
         await deleteData();
+        console.log(data);
 
-        for (let i = 0; i < data.length; i++) {
-            Axios.post("http://localhost:8080/createRawGeopoints", {
-                time: data[i].time,
-                lat: data[i].lat,
-                lng: data[i].lng
-            }).then((response) => {
-                // setIsFileSubmit(true);
-                console.log("Posted")
-            });
-        }
+        await Axios.post("http://localhost:8080/createRawGeopoints", data).then((response) => {
+            console.log("Posted")
+            props.onSetShowRawData(true)
+        });
+        // for (let i = 0; i < data.length; i++) {
+        //     await Axios.post("http://localhost:8080/createRawGeopoints", {
+        //         time: data[i].time,
+        //         lat: data[i].lat,
+        //         lng: data[i].lng
+        //     }).then((response) => {
+        //         // setIsFileSubmit(true);
+        //         console.log("Posted")
+        //     });
+        // }
     }
 
     useEffect(() => {
         props.onSetRawJsonHandler(fileContent);
         if (fileContent != null) {
             const dataToPost = fileContent[Object.keys(fileContent)[0]]
-            postData(dataToPost)
+            postData(dataToPost);
+
         }
     }, [props.sendDataToMap]);
 

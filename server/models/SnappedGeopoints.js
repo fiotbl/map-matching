@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const SnappedGeopointsSchema = new mongoose.Schema({
+    time: {
+        type: String,
+        required: true,
+    },
     lat: {
         type: Number,
         required: true,
