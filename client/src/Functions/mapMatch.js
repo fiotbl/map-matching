@@ -4,7 +4,15 @@ import { postSnappedData } from "./postSnappedData";
 
 export const mapMatch = async () => {
 
+    const deleteSnappedGeopointsData = async () => {
+        await Axios.delete("http://localhost:8080/deleteSnappedGeopoints").then((response) => {
+            console.log("Deleted All Snapped GeoPoints")
+        });
+    }
+
     const rawData = await getRawData();
+
+    console.log("Setting up API for map matching")
 
     var path = ""
     const googleurl = "https://roads.googleapis.com/v1/snapToRoads?path="
@@ -25,7 +33,8 @@ export const mapMatch = async () => {
         headers: {}
     };
 
-    console.log("Setting up API for map matching")
+    await deleteSnappedGeopointsData();
+    console.log(" Finish Deleting Snapped Geopoints")
 
 
     await axios(config)

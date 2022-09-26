@@ -37,6 +37,16 @@ app.get("/getRawGeopoints", (req, res) => {
     })
 })
 
+app.delete("/deleteSnappedGeopoints", (req, res) => {
+    SnappedGeopointsModel.remove({}, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(result)
+        }
+    })
+})
+
 app.delete("/deleteRawGeopoints", (req, res) => {
     RawGeopointsModel.remove({}, (err, result) => {
         if (err) {
