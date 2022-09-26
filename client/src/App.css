@@ -16,8 +16,24 @@ body {
   flex: 1;
 }
 
+.LeftPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.OutputData {
+  width: 50vh;
+  height: 50vh;
+  border-right: 2px solid rgb(73, 73, 73);
+  background-color: #9fc0c6ff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .UserInput {
   width: 50vh;
+  height: 50vh;
   border-right: 2px solid rgb(73, 73, 73);
   background-color: #87bba2ff;
   display: flex;
