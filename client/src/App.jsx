@@ -53,13 +53,11 @@ function App() {
   };
 
   const setHandleMapMatchHandler = async () => {
-    // setMapMatch(mapMatch);
     const testRawData = await mapMatch();
-    console.log("here", testRawData);
+    console.log("Here", testRawData);
 
     const snappedData = await getSnappedData();
     setSnappedJson(snappedData);
-    // console.log(mapMatch);
   };
 
   const setSnappedGeopoints = (snappedGeopoints) => {

@@ -91,38 +91,16 @@ const UserInput = (prop) => {
             .catch(function (error) {
                 console.log(error);
             });
-
-        // await Axios.get("http://localhost:8080/getSnappedGeopoints").then((response) => {
-        //     setSnappedGeopoints(response.data)
-        // });
-
-        console.log("checking snapped geopoints", snappedGeopoints)
-        // prop.OnSetSnappedGeopoints(snappedGeopoints)
-
-        // setIsSnapped(true);
-        // console.log(snappedGeopoints)
-
-
     };
 
     const getSnappedData = async () => {
-        // const { data } = await Axios.get("http://localhost:8080/getSnappedGeopoints");
         await Axios.get("http://localhost:8080/getSnappedGeopoints").then((response) => {
             setSnappedGeopoints(response.data);
             prop.OnSetSnappedGeopoints(response.data)
         });
 
         console.log("here", snappedGeopoints)
-
-
-        // console.log("here", snappedGeopoints)
     };
-
-    // useEffect(() => {
-    //     getSnappedData();
-    //     console.log("here 2", snappedGeopoints)
-    //     prop.OnSetSnappedGeopoints(snappedGeopoints)
-    // }, [isSnapped]);
 
     const handleClear = () => {
         // setSelectedFile();
