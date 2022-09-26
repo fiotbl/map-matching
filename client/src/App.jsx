@@ -1,53 +1,16 @@
-import { useState, useEffect } from "react";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { useState } from "react";
 import Map from "./Map/Map";
 import UploadFileCard from "./Cards/UploadFileCard";
 import FileInformation from "./Cards/FileInformation";
 import ButtonBar from "./Cards/ButtonBar";
 import "./App.css";
 import logo from "./TitleImg.png";
+import DataOutput from "./Cards/DataOutput";
 
 // functions
 import { getTest } from "./Functions/test";
 import { getSnappedData } from "./Functions/getSnappedData";
 import { mapMatch } from "./Functions/mapMatch";
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
 
 
 function App() {
@@ -111,11 +74,6 @@ function App() {
   //     })
   //     .catch((err) => console.log(err));
   // }, []);
-  const [value, setValue] = useState('one');
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <div className="MainUI">
@@ -143,24 +101,7 @@ function App() {
           />
         </div>
         <div className="OutputData">
-          <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-                <Tab label="Item One" {...a11yProps(0)} />
-                <Tab label="Item Two" {...a11yProps(1)} />
-                <Tab label="Item Three" {...a11yProps(2)} />
-              </Tabs>
-            </Box>
-            <TabPanel value={value} index={0}>
-              Item One
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              Item Three
-            </TabPanel>
-          </Box>
+          <DataOutput></DataOutput>
         </div>
       </div>
       <div className="Map">
