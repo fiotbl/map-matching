@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import { getSnappedData } from "../Functions/getSnappedData";
 import { getRawData } from "../Functions/getRawData";
+import GeopointDataItem from "./GeopointDataItem";
 
 
 function TabPanel(props) {
@@ -23,7 +24,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    <Typography component={'span'}>{children}</Typography>
                 </Box>
             )}
         </div>
@@ -73,7 +74,20 @@ const DataOutput = (props) => {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                {JSON.stringify(rawData)}
+                {/* {JSON.stringify(rawData)}
+                 */}
+                {rawData != ""
+                    ? <ul>
+                        {rawData.map((data) =>
+                        (<GeopointDataItem
+                            key={data.id} // key is a prop that can be added to ANY component (custom or built in)
+                            date={data.time}
+                            lat={data.lat}
+                            lng={data.lng}
+                        />))}
+                    </ul>
+                    : <p>No data uploaded!</p>
+                }
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Item Two

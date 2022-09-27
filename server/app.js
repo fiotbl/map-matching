@@ -74,9 +74,17 @@ app.post("/createRawGeopoints", async (req, res) => {
 
 app.post("/createSnappedGeopoints", async (req, res) => {
     const snappedGeopoint = req.body;
-    const newSnappedGeopoint = new SnappedGeopointsModel(snappedGeopoint);
-    await newSnappedGeopoint.save();
-    res.json(snappedGeopoint)
+    console.log("in API", snappedGeopoint)
+    SnappedGeopointsModel.insertMany(snappedGeopoint)
+        .then(function (docs) {
+            res.json(docs);
+        })
+        .catch(function (err) {
+            res.status(500).send(err);
+        });
+    // const newSnappedGeopoint = new SnappedGeopointsModel(snappedGeopoint);
+    // await newSnappedGeopoint.save();
+    // res.json(snappedGeopoint)
 })
 
 app.get("/getSnappedGeopoints", (req, res) => {

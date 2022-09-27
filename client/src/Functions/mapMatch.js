@@ -39,18 +39,30 @@ export const mapMatch = async () => {
 
     await axios(config)
         .then(async function (response) {
-            const snappedPoints = response.data[Object.keys(response.data)[0]]
+            const rawSnappedPoints = response.data[Object.keys(response.data)[0]]
+            console.log(rawSnappedPoints.map(el => el.location))
+            let snappedPoints = rawSnappedPoints.map(el => el.location)
+            snappedPoints = snappedPoints.map(item => {
+                return {
+                    lat: item.latitude,
+                    lng: item.longitude
+                };
+            });
             console.log(snappedPoints)
             // await postSnappedData(snappedPoints);
-            for (let i = 0; i < snappedPoints.length; i++) {
-                await Axios.post("http://localhost:8080/createSnappedGeopoints", {
-                    lat: snappedPoints[i].location.latitude,
-                    lng: snappedPoints[i].location.longitude,
-                }).then((response) => {
-                    // return 1;
-                    console.log("First")
-                });
-            }
+            // for (let i = 0; i < snappedPoints.length; i++) {
+            //     await Axios.post("http://localhost:8080/createSnappedGeopoints", {
+            //         lat: snappedPoints[i].location.latitude,
+            //         lng: snappedPoints[i].location.longitude,
+            //     }).then((response) => {
+            //         // return 1;
+            //         console.log("First")
+            //     });
+            // }
+            await Axios.post("http://localhost:8080/createSnappedGeopoints", snappedPoints).then((response) => {
+                console.log("Created snapped geopoints")
+                // props.onSetShowRawData(true)
+            });
             console.log("Second")
             return snappedPoints;
         })
