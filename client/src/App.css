@@ -23,7 +23,7 @@ body {
 
 .OutputData {
   width: 50vh;
-  height: 49vh;
+  height: 52vh;
   border-right: 2px solid rgb(73, 73, 73);
   background-color: #9fc0c6ff;
   display: flex;
@@ -33,7 +33,7 @@ body {
 
 .UserInput {
   width: 50vh;
-  height: 45vh;
+  height: 42vh;
   border-right: 2px solid rgb(73, 73, 73);
   background-color: #87bba2ff;
   display: flex;
@@ -55,7 +55,7 @@ body {
   display: flex;
 }
 h1 {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: roboto;
   text-align: center;
 }
 

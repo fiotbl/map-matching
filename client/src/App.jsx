@@ -90,7 +90,7 @@ function App() {
           <div className="UserInput">
             <div className="Title">
               <img src={logo} height="40" width="40" />
-              <h1>Map Match</h1>
+              <h1>Map-Matching</h1>
             </div>
             <UploadFileCard
               onSetIsFilePicked={setIsFilePickedHandler}

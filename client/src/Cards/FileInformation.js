@@ -7,10 +7,10 @@ const FileInformation = (props) => {
             <CardContent>
                 {props.isFilePicked ? (
                     <div>
-                        <p>File Name: {props.selectedFile.name}</p>
-                        <p>File Size (bytes): {props.selectedFile.size}</p>
+                        <p><b>File Name:</b> {props.selectedFile.name}</p>
+                        <p><b>File Size </b>(bytes): {props.selectedFile.size}</p>
                         <p>
-                            File Last Modified Date:{' '}
+                            <b>File Last Modified Date:</b>{' '}
                             {props.selectedFile.lastModifiedDate.toLocaleDateString()}
                         </p>
                     </div>

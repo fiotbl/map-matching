@@ -1,14 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import { Grid, Card, CardContent, CardActions, Button } from "@material-ui/core";
-import { createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Axios from "axios";
-
+import './UploadFileCard.css'
 
 const UploadFileCard = (props) => {
 
@@ -75,10 +74,10 @@ const UploadFileCard = (props) => {
 
     return (
         <Card style={{ height: 160, width: 430, backgroundColor: "#c9e4caff", marginBottom: 10 }}>
-            <Grid container spacing={1}>
+            <Grid container>
                 <Grid item xs={8}>
                     <CardContent>
-                        Upload GPS Data (JSON Format):
+                        <b>Upload GPS Data (JSON Format):</b>
                     </CardContent>
                 </Grid>
                 <Grid item xs={4}>
@@ -101,7 +100,7 @@ const UploadFileCard = (props) => {
                     </CardActions>
                 </Grid>
                 <Grid item xs={6}>
-                    <CardContent>Select a Map-Matching Algorithm:
+                    <CardContent><b>Select a Map-Matching Algorithm:</b>
                     </CardContent>
                 </Grid>
                 <Grid item xs={6}>
