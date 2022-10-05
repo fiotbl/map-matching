@@ -6,6 +6,8 @@ import ButtonBar from "./Cards/ButtonBar";
 import "./App.css";
 import logo from "./TitleImg.png";
 import DataOutput from "./Cards/DataOutput";
+import theme from "./theme";
+import { ThemeProvider } from '@mui/material/styles';
 
 // functions
 import { getTest } from "./Functions/test";
@@ -82,41 +84,46 @@ function App() {
   // }, []);
 
   return (
-    <div className="MainUI">
-      <div className="LeftPanel">
-        <div className="UserInput">
-          <div className="Title">
-            <img src={logo} height="40" width="40" />
-            <h1>Map Match</h1>
+    <ThemeProvider theme={theme}>
+      <div className="MainUI">
+        <div className="LeftPanel">
+          <div className="UserInput">
+            <div className="Title">
+              <img src={logo} height="40" width="40" />
+              <h1>Map Match</h1>
+            </div>
+            <UploadFileCard
+              onSetIsFilePicked={setIsFilePickedHandler}
+              onSetFileContent={setFileContentHandler}
+              onSetSelectedFile={setSelectedFileHandler}
+              onSetRawJsonHandler={setRawJsonHandler}
+              sendDataToMap={sendDataToMap}
+              onSetShowRawData={setShowRawDataHandler}
+            />
+            <FileInformation
+              isFilePicked={isFilePicked}
+              fileContent={fileContent}
+              selectedFile={selectedFile}
+            />
+
           </div>
-          <UploadFileCard
-            onSetIsFilePicked={setIsFilePickedHandler}
-            onSetFileContent={setFileContentHandler}
-            onSetSelectedFile={setSelectedFileHandler}
-            onSetRawJsonHandler={setRawJsonHandler}
-            sendDataToMap={sendDataToMap}
-            onSetShowRawData={setShowRawDataHandler}
-          />
-          <FileInformation
-            isFilePicked={isFilePicked}
-            fileContent={fileContent}
-            selectedFile={selectedFile}
-          />
-          <ButtonBar
-            onSetSendDataToMap={setSendDataToMapHandler}
-            onSetHandleMapMatch={setHandleMapMatchHandler}
-          />
+          <div className="ButtonBarMain">
+            <ButtonBar
+              onSetSendDataToMap={setSendDataToMapHandler}
+              onSetHandleMapMatch={setHandleMapMatchHandler}
+            />
+          </div>
+          <div className="OutputData">
+            <DataOutput
+              showRawData={showRawData}
+            />
+          </div>
         </div>
-        <div className="OutputData">
-          <DataOutput
-            showRawData={showRawData}
-          />
+        <div className="Map">
+          <Map rawJson={rawJson} snappedJson={snappedJson} />
         </div>
       </div>
-      <div className="Map">
-        <Map rawJson={rawJson} snappedJson={snappedJson} />
-      </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

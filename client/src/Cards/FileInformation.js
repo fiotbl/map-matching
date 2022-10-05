@@ -3,7 +3,7 @@ import { Card, CardContent, CardActions, Button } from "@material-ui/core";
 
 const FileInformation = (props) => {
     return (
-        <Card style={{ width: 400, backgroundColor: "#c9e4caff", marginBottom: 20 }}>
+        <Card style={{ width: 430, backgroundColor: "#c9e4caff", marginBottom: 20 }}>
             <CardContent>
                 {props.isFilePicked ? (
                     <div>
