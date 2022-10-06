@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const RawGeopointsModel = require('./models/RawGeopoints')
 const SnappedGeopointsModel = require('./models/SnappedGeopoints')
+const OSRMSnappedGeopointsModel = require('./models/OSRMSnappedGeopoints')
+
 require("dotenv").config();
 
 // app
@@ -39,6 +41,16 @@ app.get("/getRawGeopoints", (req, res) => {
 
 app.delete("/deleteSnappedGeopoints", (req, res) => {
     SnappedGeopointsModel.remove({}, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(result)
+        }
+    })
+})
+
+app.delete("/deleteOSRMSnappedGeopoints", (req, res) => {
+    OSRMSnappedGeopointsModel.remove({}, (err, result) => {
         if (err) {
             res.json(err)
         } else {
@@ -82,13 +94,32 @@ app.post("/createSnappedGeopoints", async (req, res) => {
         .catch(function (err) {
             res.status(500).send(err);
         });
-    // const newSnappedGeopoint = new SnappedGeopointsModel(snappedGeopoint);
-    // await newSnappedGeopoint.save();
-    // res.json(snappedGeopoint)
+})
+
+app.post("/createOSRMSnappedGeopoints", async (req, res) => {
+    const OSRMSnappedGeopoint = req.body;
+    console.log("in OSRMSnappedGeopoint API", OSRMSnappedGeopoint)
+    OSRMSnappedGeopointsModel.insertMany(OSRMSnappedGeopoint)
+        .then(function (docs) {
+            res.json(docs);
+        })
+        .catch(function (err) {
+            res.status(500).send(err);
+        });
 })
 
 app.get("/getSnappedGeopoints", (req, res) => {
     SnappedGeopointsModel.find({}, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(result)
+        }
+    })
+})
+
+app.get("/getOSRMSnappedGeopoints", (req, res) => {
+    OSRMSnappedGeopointsModel.find({}, (err, result) => {
         if (err) {
             res.json(err)
         } else {

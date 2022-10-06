@@ -24,6 +24,7 @@ export const mapMatch = async () => {
     }
 
     var url = googleurl + path.slice(0, -1) + interpolate + googleMapsApiKey
+    console.log(url);
 
     var axios = require('axios');
 
@@ -49,19 +50,8 @@ export const mapMatch = async () => {
                 };
             });
             console.log(snappedPoints)
-            // await postSnappedData(snappedPoints);
-            // for (let i = 0; i < snappedPoints.length; i++) {
-            //     await Axios.post("http://localhost:8080/createSnappedGeopoints", {
-            //         lat: snappedPoints[i].location.latitude,
-            //         lng: snappedPoints[i].location.longitude,
-            //     }).then((response) => {
-            //         // return 1;
-            //         console.log("First")
-            //     });
-            // }
             await Axios.post("http://localhost:8080/createSnappedGeopoints", snappedPoints).then((response) => {
                 console.log("Created snapped geopoints")
-                // props.onSetShowRawData(true)
             });
             console.log("Second")
             return snappedPoints;
@@ -69,6 +59,4 @@ export const mapMatch = async () => {
         .catch(function (error) {
             console.log(error);
         });
-
-    // return Promise.resolve();
 }

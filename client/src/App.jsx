@@ -13,6 +13,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import { getTest } from "./Functions/test";
 import { getSnappedData } from "./Functions/getSnappedData";
 import { mapMatch } from "./Functions/mapMatch";
+import { OSRMMapMatch } from "./Functions/OSRMMapMatch";
+
 
 
 function App() {
@@ -59,6 +61,7 @@ function App() {
 
   const setHandleMapMatchHandler = async () => {
     const testRawData = await mapMatch();
+    const testOSRM = await OSRMMapMatch();
     console.log("Here", testRawData);
 
     const snappedData = await getSnappedData();
