@@ -10,6 +10,14 @@ import { getSnappedData } from "../Functions/getSnappedData";
 import { getRawData } from "../Functions/getRawData";
 import GeopointDataItem from "./GeopointDataItem";
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -47,11 +55,18 @@ function a11yProps(index) {
 const DataOutput = (props) => {
     const [value, setValue] = useState(0);
     const [rawData, setRawData] = useState("");
+    const [snappedData, setSnappedData] = useState("");
 
     const getRawDataHelper = async () => {
         const rawDataFetched = await getRawData();
         console.log("Raw data fetched", rawDataFetched)
         setRawData(rawDataFetched);
+    }
+
+    const getSnappedDataHelper = async () => {
+        const snappedDataFetched = await getSnappedData();
+        console.log("Snapped data fetched", snappedDataFetched)
+        setSnappedData(snappedDataFetched);
     }
 
     const handleChange = (event, newValue) => {
@@ -65,6 +80,12 @@ const DataOutput = (props) => {
         }
     }, [props.showRawData]);
 
+    useEffect(() => {
+        if (props.showSnappedData) {
+            getSnappedDataHelper();
+        }
+    }, [props.showSnappedData]);
+
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -76,21 +97,80 @@ const DataOutput = (props) => {
             <TabPanel value={value} index={0}>
                 {/* {JSON.stringify(rawData)}
                  */}
-                {rawData != ""
-                    ? <ul>
-                        {rawData.map((data) =>
-                        (<GeopointDataItem
-                            key={data.id} // key is a prop that can be added to ANY component (custom or built in)
-                            date={data.time}
-                            lat={data.lat}
-                            lng={data.lng}
-                        />))}
-                    </ul>
+                {rawData != "" ?
+                    <div style={{ overflow: "auto" }} >
+                        <Table>
+                            <TableHead>
+                                <TableRow
+                                    style={{
+                                        backgroundColor: "rgb(111, 134, 138)",
+                                        height: "30px"
+                                    }}
+                                >
+                                    <TableCell align="center">Latitude</TableCell>
+                                    <TableCell align="center">Longitude</TableCell>
+                                    <TableCell />
+                                </TableRow>
+                            </TableHead>
+                        </Table>
+                        <div style={{ overflow: 'auto', height: '340px' }}>
+                            <Table>
+                                <TableBody>
+                                    {rawData.map((row, i) => {
+                                        return (
+                                            <TableRow
+                                                key={i}
+                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            >
+                                                <TableCell align="center">{row.lat}</TableCell>
+                                                <TableCell align="center">{row.lng}</TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                                </TableBody>
+                            </Table>
+                        </div>
+                    </div>
                     : <p>No data uploaded!</p>
                 }
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                {snappedData != "" ?
+                    <div style={{ overflow: "auto" }} >
+                        <Table>
+                            <TableHead>
+                                <TableRow
+                                    style={{
+                                        backgroundColor: "rgb(111, 134, 138)",
+                                        height: "30px"
+                                    }}
+                                >
+                                    <TableCell align="center">Latitude</TableCell>
+                                    <TableCell align="center">Longitude</TableCell>
+                                    <TableCell />
+                                </TableRow>
+                            </TableHead>
+                        </Table>
+                        <div style={{ overflow: 'auto', height: '340px' }}>
+                            <Table>
+                                <TableBody>
+                                    {snappedData.map((row, i) => {
+                                        return (
+                                            <TableRow
+                                                key={i}
+                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            >
+                                                <TableCell align="center">{row.lat}</TableCell>
+                                                <TableCell align="center">{row.lng}</TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                                </TableBody>
+                            </Table>
+                        </div>
+                    </div>
+                    : <p>No data uploaded!</p>
+                }
             </TabPanel>
         </Box>
     )

@@ -18,14 +18,13 @@ import { mapMatch } from "./Functions/mapMatch";
 function App() {
   const [rawJson, setRawJson] = useState();
   const [snappedJson, setSnappedJson] = useState();
-  // const [test, setTest] = useState("Initial Value");
   const [isFilePicked, setIsFilePicked] = useState(false);
   const [fileContent, setFileContent] = useState();
   const [selectedFile, setSelectedFile] = useState();
   const [sendDataToMap, setSendDataToMap] = useState(false);
   const [showRawData, setShowRawData] = useState(false);
+  const [showSnappedData, setShowSnappedData] = useState(false);
 
-  // const [mapMatch, setMapMatch] = useState(false);
 
   const testCall = async () => {
     const testData = await getSnappedData();
@@ -64,6 +63,7 @@ function App() {
 
     const snappedData = await getSnappedData();
     setSnappedJson(snappedData);
+    setShowSnappedData(true);
   };
 
   const setSnappedGeopoints = (snappedGeopoints) => {
@@ -75,13 +75,9 @@ function App() {
     setShowRawData(true);
   };
 
-  // useEffect(() => {
-  //   getTest()
-  //     .then((res) => {
-  //       setTest(res.message);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
+  const setShowSnappedDataHandler = () => {
+    setShowSnappedData(true);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -116,6 +112,7 @@ function App() {
           <div className="OutputData">
             <DataOutput
               showRawData={showRawData}
+              showSnappedData={showSnappedData}
             />
           </div>
         </div>
