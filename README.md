@@ -31,16 +31,19 @@ The website will have a map for users to visualise the locations of their GPS da
 ## Getting Started
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/fiotbl/map-matching.git
    ```
-3. Install NPM packages
+2. Start the client
    ```sh
-   npm install
+   npm start
    ```
-4. Enter your API in `.env`
+3. Start the server
+   ```sh
+   node app.js
+   ```
+4. Enter your Google Maps API in `.env`
    ```js
    REACT_APP_GOOGLE_API_KEY='YOUR_API_KEY';
    ```
@@ -50,7 +53,7 @@ The website will have a map for users to visualise the locations of their GPS da
 
 
   
-## Map-Matching Algorithms 
+## Map-Matching Algorithms Used
 ### 1. [Google Maps Snap to Road](https://developers.google.com/maps/documentation/roads/snap)
 
 ### 2. [OSRM Match Service API](http://project-osrm.org/docs/v5.5.1/api/?language=JavaScript#general-options)
