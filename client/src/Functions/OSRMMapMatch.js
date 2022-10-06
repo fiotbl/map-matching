@@ -32,7 +32,7 @@ export const OSRMMapMatch = async () => {
     await deleteOSRMSnappedGeopointsData();
     console.log(" Finish Deleting Snapped Geopoints")
 
-    Axios.get(url).then(async function (response) {
+    await Axios.get(url).then(async function (response) {
         const rawSnappedPoints = response.data[Object.keys(response.data)[2]]
         let snappedPoints = rawSnappedPoints.map(el => el.location)
         var newPoints = []

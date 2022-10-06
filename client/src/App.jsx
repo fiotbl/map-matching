@@ -12,6 +12,7 @@ import { ThemeProvider } from '@mui/material/styles';
 // functions
 import { getTest } from "./Functions/test";
 import { getSnappedData } from "./Functions/getSnappedData";
+import { getOSRMSnappedData } from "./Functions/getOSRMSnappedData";
 import { mapMatch } from "./Functions/mapMatch";
 import { OSRMMapMatch } from "./Functions/OSRMMapMatch";
 
@@ -60,26 +61,19 @@ function App() {
   };
 
   const setHandleMapMatchHandler = async () => {
-    const testRawData = await mapMatch();
+    // const testRawData = await mapMatch();
     const testOSRM = await OSRMMapMatch();
-    console.log("Here", testRawData);
+    console.log("Here", testOSRM);
 
-    const snappedData = await getSnappedData();
-    setSnappedJson(snappedData);
+    // const snappedData = await getSnappedData();
+    const OSRMSnappedData = await getOSRMSnappedData();
+
+    setSnappedJson(OSRMSnappedData);
     setShowSnappedData(true);
-  };
-
-  const setSnappedGeopoints = (snappedGeopoints) => {
-    setSnappedJson(snappedGeopoints);
-    console.log(snappedGeopoints);
   };
 
   const setShowRawDataHandler = () => {
     setShowRawData(true);
-  };
-
-  const setShowSnappedDataHandler = () => {
-    setShowSnappedData(true);
   };
 
   return (
