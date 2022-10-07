@@ -89,10 +89,8 @@ const DataOutput = (props) => {
     }, [props.showRawData]);
 
     useEffect(() => {
-        if (props.showSnappedData) {
-            getSnappedDataHelper();
-        }
-    }, [props.showSnappedData, snappedData]);
+        getSnappedDataHelper();
+    }, [props.showSnappedData]);
 
     return (
         <Box sx={{ width: '100%' }}>

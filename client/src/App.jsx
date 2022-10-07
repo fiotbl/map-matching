@@ -67,13 +67,13 @@ function App() {
       await mapMatch();
       const snappedData = await getSnappedData();
       setSnappedJson(snappedData);
-      setShowSnappedData(true);
+      setShowSnappedData(!showSnappedData);
     }
     else if (algorithm == 20) {
       await OSRMMapMatch();
       const OSRMSnappedData = await getOSRMSnappedData();
       setSnappedJson(OSRMSnappedData);
-      setShowSnappedData(true);
+      setShowSnappedData(!showSnappedData);
     }
   };
 
