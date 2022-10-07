@@ -10,7 +10,6 @@ import theme from "./theme";
 import { ThemeProvider } from '@mui/material/styles';
 
 // functions
-import { getTest } from "./Functions/test";
 import { getSnappedData } from "./Functions/getSnappedData";
 import { getOSRMSnappedData } from "./Functions/getOSRMSnappedData";
 import { mapMatch } from "./Functions/mapMatch";
@@ -27,6 +26,8 @@ function App() {
   const [sendDataToMap, setSendDataToMap] = useState(false);
   const [showRawData, setShowRawData] = useState(false);
   const [showSnappedData, setShowSnappedData] = useState(false);
+  const [algorithm, setAlgoritm] = useState();
+
 
 
   const testCall = async () => {
@@ -61,19 +62,27 @@ function App() {
   };
 
   const setHandleMapMatchHandler = async () => {
-    // const testRawData = await mapMatch();
-    const testOSRM = await OSRMMapMatch();
-    console.log("Here", testOSRM);
-
-    // const snappedData = await getSnappedData();
-    const OSRMSnappedData = await getOSRMSnappedData();
-
-    setSnappedJson(OSRMSnappedData);
-    setShowSnappedData(true);
+    console.log("check here", algorithm)
+    if (algorithm == 10) {
+      await mapMatch();
+      const snappedData = await getSnappedData();
+      setSnappedJson(snappedData);
+      setShowSnappedData(true);
+    }
+    else if (algorithm == 20) {
+      await OSRMMapMatch();
+      const OSRMSnappedData = await getOSRMSnappedData();
+      setSnappedJson(OSRMSnappedData);
+      setShowSnappedData(true);
+    }
   };
 
   const setShowRawDataHandler = () => {
     setShowRawData(true);
+  };
+
+  const setAlgoritmHandler = (algorithm) => {
+    setAlgoritm(algorithm);
   };
 
   return (
@@ -92,13 +101,13 @@ function App() {
               onSetRawJsonHandler={setRawJsonHandler}
               sendDataToMap={sendDataToMap}
               onSetShowRawData={setShowRawDataHandler}
+              onSetAlgoritm={setAlgoritmHandler}
             />
             <FileInformation
               isFilePicked={isFilePicked}
               fileContent={fileContent}
               selectedFile={selectedFile}
             />
-
           </div>
           <div className="ButtonBarMain">
             <ButtonBar
@@ -110,6 +119,7 @@ function App() {
             <DataOutput
               showRawData={showRawData}
               showSnappedData={showSnappedData}
+              algorithm={algorithm}
             />
           </div>
         </div>

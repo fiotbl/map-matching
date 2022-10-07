@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import { getSnappedData } from "../Functions/getSnappedData";
+import { getOSRMSnappedData } from "../Functions/getOSRMSnappedData";
 import { getRawData } from "../Functions/getRawData";
 import GeopointDataItem from "./GeopointDataItem";
 
@@ -64,9 +65,16 @@ const DataOutput = (props) => {
     }
 
     const getSnappedDataHelper = async () => {
-        const snappedDataFetched = await getSnappedData();
-        console.log("Snapped data fetched", snappedDataFetched)
-        setSnappedData(snappedDataFetched);
+        if (props.algorithm == 10) {
+            const snappedDataFetched = await getSnappedData();
+            console.log("Snapped data fetched", snappedDataFetched)
+            setSnappedData(snappedDataFetched);
+        }
+        else if (props.algorithm == 20) {
+            const snappedDataFetched = await getOSRMSnappedData();
+            console.log("Snapped data fetched", snappedDataFetched)
+            setSnappedData(snappedDataFetched);
+        }
     }
 
     const handleChange = (event, newValue) => {
@@ -84,7 +92,7 @@ const DataOutput = (props) => {
         if (props.showSnappedData) {
             getSnappedDataHelper();
         }
-    }, [props.showSnappedData]);
+    }, [props.showSnappedData, snappedData]);
 
     return (
         <Box sx={{ width: '100%' }}>

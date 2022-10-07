@@ -15,6 +15,7 @@ const UploadFileCard = (props) => {
 
     const handleChange = (event) => {
         setAlgorithm(event.target.value);
+        props.onSetAlgoritm(event.target.value)
     };
 
     const [fileContent, setFileContent] = useState();
@@ -33,16 +34,6 @@ const UploadFileCard = (props) => {
             console.log("Posted")
             props.onSetShowRawData(true)
         });
-        // for (let i = 0; i < data.length; i++) {
-        //     await Axios.post("http://localhost:8080/createRawGeopoints", {
-        //         time: data[i].time,
-        //         lat: data[i].lat,
-        //         lng: data[i].lng
-        //     }).then((response) => {
-        //         // setIsFileSubmit(true);
-        //         console.log("Posted")
-        //     });
-        // }
     }
 
     useEffect(() => {
