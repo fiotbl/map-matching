@@ -59,10 +59,6 @@ const UploadFileCard = (props) => {
         props.onSetFileContent(JSON.parse(content))
     }
 
-    const testData = (e) => {
-        console.log(fileContent)
-    }
-
     return (
         <Card style={{ height: 160, width: 430, backgroundColor: "#c9e4caff", marginBottom: 10 }}>
             <Grid container>

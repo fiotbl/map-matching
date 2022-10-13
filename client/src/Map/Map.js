@@ -1,13 +1,6 @@
 import { useLoadScript, GoogleMap, Marker, Polyline } from "@react-google-maps/api";
 import "./Map.css";
 
-const path = [
-    { lat: 37.772, lng: -122.214 },
-    { lat: 21.291, lng: -157.821 },
-    { lat: -18.142, lng: 178.431 },
-    { lat: -27.467, lng: 153.027 }
-];
-
 const options = {
     strokeColor: 'blue',
     strokeOpacity: 1,
@@ -51,9 +44,6 @@ const Map = (prop) => {
         console.log("entered")
         console.log(prop.snappedJson)
         let snappedJson = prop.snappedJson
-        // snappedJson = snappedJson.replace(/'/g, '"')
-        // console.log(snappedJson)
-        // snappedGeopointsJson = JSON.parse(snappedJson);
         snappedGeopointsJson = snappedJson;
         console.log(typeof (snappedGeopointsJson))
     }
@@ -69,7 +59,7 @@ const Map = (prop) => {
                     center={{ lat: 1.3521, lng: 103.8198 }}
                     zoom={12}
                     mapContainerStyle={{
-                        height: "914px",
+                        height: "946px",
                         width: "100%"
                     }}
                 >

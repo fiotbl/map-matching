@@ -9,15 +9,12 @@ import Typography from '@mui/material/Typography';
 import { getSnappedData } from "../Functions/getSnappedData";
 import { getOSRMSnappedData } from "../Functions/getOSRMSnappedData";
 import { getRawData } from "../Functions/getRawData";
-import GeopointDataItem from "./GeopointDataItem";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
 
 function TabPanel(props) {
@@ -175,7 +172,7 @@ const DataOutput = (props) => {
                             </Table>
                         </div>
                     </div>
-                    : <p>No data uploaded!</p>
+                    : <p>No map-matched data yet!</p>
                 }
             </TabPanel>
         </Box>
