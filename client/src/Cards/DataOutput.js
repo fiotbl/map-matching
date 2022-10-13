@@ -5,6 +5,8 @@ import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import FileSaver from "file-saver";
+import Button from "@mui/material/Button";
 
 import { getSnappedData } from "../Functions/getSnappedData";
 import { getOSRMSnappedData } from "../Functions/getOSRMSnappedData";
@@ -50,10 +52,16 @@ function a11yProps(index) {
     };
 }
 
+
 const DataOutput = (props) => {
     const [value, setValue] = useState(0);
     const [rawData, setRawData] = useState("");
     const [snappedData, setSnappedData] = useState("");
+
+    const downloadSnappedData = () => {
+        var blob = new Blob([JSON.stringify(snappedData)], { type: "text/plain;charset=utf-8" });
+        FileSaver.saveAs(blob, "hello world.json");
+    }
 
     const getRawDataHelper = async () => {
         const rawDataFetched = await getRawData();
@@ -98,8 +106,6 @@ const DataOutput = (props) => {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                {/* {JSON.stringify(rawData)}
-                 */}
                 {rawData != "" ?
                     <div style={{ overflow: "auto" }} >
                         <Table>
@@ -154,7 +160,7 @@ const DataOutput = (props) => {
                                 </TableRow>
                             </TableHead>
                         </Table>
-                        <div style={{ overflow: 'auto', height: '340px' }}>
+                        <div style={{ overflow: 'auto', height: '300px', marginBottom: '10px' }}>
                             <Table>
                                 <TableBody>
                                     {snappedData.map((row, i) => {
@@ -170,7 +176,16 @@ const DataOutput = (props) => {
                                     })}
                                 </TableBody>
                             </Table>
+
                         </div>
+                        <Box display="flex" justifyContent="center">
+                            <Button variant="contained" style={{
+                                backgroundColor: "#55828bff",
+                            }} component="span" onClick={downloadSnappedData}>
+                                Download Map-Matched Data
+                            </Button>
+                        </Box>
+
                     </div>
                     : <p>No map-matched data yet!</p>
                 }
