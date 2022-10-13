@@ -70,17 +70,30 @@ const DataOutput = (props) => {
     }
 
     const getSnappedDataHelper = async () => {
-        if (props.algorithm == 10) {
-            const snappedDataFetched = await getSnappedData();
-            console.log("Snapped data fetched", snappedDataFetched)
-            setSnappedData(snappedDataFetched);
-        }
-        else if (props.algorithm == 20) {
-            const snappedDataFetched = await getOSRMSnappedData();
-            console.log("Snapped data fetched", snappedDataFetched)
-            setSnappedData(snappedDataFetched);
+        var snappedDataFetched;
+        switch (props.algorithm) {
+            case 10:
+                snappedDataFetched = await getSnappedData();
+                setSnappedData(snappedDataFetched);
+                break;
+            case 20:
+                snappedDataFetched = await getOSRMSnappedData();
+                setSnappedData(snappedDataFetched);
+                break;
         }
     }
+
+
+    // if (props.algorithm == 10) {
+    //     const snappedDataFetched = await getSnappedData();
+    //     console.log("Snapped data fetched", snappedDataFetched)
+    //     setSnappedData(snappedDataFetched);
+    // }
+    // else if (props.algorithm == 20) {
+    //     const snappedDataFetched = await getOSRMSnappedData();
+    //     console.log("Snapped data fetched", snappedDataFetched)
+    //     setSnappedData(snappedDataFetched);
+    // }
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

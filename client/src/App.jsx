@@ -62,20 +62,34 @@ function App() {
   };
 
   const setHandleMapMatchHandler = async () => {
-    console.log("check here", algorithm)
-    if (algorithm == 10) {
-      await mapMatch();
-      const snappedData = await getSnappedData();
-      setSnappedJson(snappedData);
-      setShowSnappedData(!showSnappedData);
+    var snappedData;
+    switch (algorithm) {
+      case 10:
+        await mapMatch();
+        snappedData = await getSnappedData();
+        break;
+      case 20:
+        await OSRMMapMatch();
+        snappedData = await getOSRMSnappedData();
+        break;
     }
-    else if (algorithm == 20) {
-      await OSRMMapMatch();
-      const OSRMSnappedData = await getOSRMSnappedData();
-      setSnappedJson(OSRMSnappedData);
-      setShowSnappedData(!showSnappedData);
-    }
+    setSnappedJson(snappedData);
+    setShowSnappedData(!showSnappedData);
   };
+
+  // console.log("check here", algorithm)
+  // if (algorithm == 10) {
+  //   await mapMatch();
+  //   const snappedData = await getSnappedData();
+  //   setSnappedJson(snappedData);
+  //   setShowSnappedData(!showSnappedData);
+  // }
+  // else if (algorithm == 20) {
+  //   await OSRMMapMatch();
+  //   const OSRMSnappedData = await getOSRMSnappedData();
+  //   setSnappedJson(OSRMSnappedData);
+  //   setShowSnappedData(!showSnappedData);
+  // }
 
   const setShowRawDataHandler = () => {
     setShowRawData(true);

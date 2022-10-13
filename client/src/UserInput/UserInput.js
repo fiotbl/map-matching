@@ -24,13 +24,7 @@ const UserInput = (prop) => {
         setFileContent(JSON.parse(content));
     }
 
-    // const getData = async () => {
-    //     const { data } = await Axios.get("http://localhost:8080/getRawGeopoints");
-    //     setRawGeopoints(data)
-    // };
-
     useEffect(() => {
-        // getData();
         Axios.get("http://localhost:8080/getRawGeopoints").then((response) => {
             setRawGeopoints(response.data)
         });
@@ -57,9 +51,6 @@ const UserInput = (prop) => {
         const interpolate = "&interpolate=true&key="
         const googleMapsApiKey = process.env.REACT_APP_GOOGLE_API_KEY
         for (let i = 0; i < rawGeopoints.length; i++) {
-            // console.log(rawGeopoints[i].time)
-            // console.log(rawGeopoints[i].lat)
-            // console.log(rawGeopoints[i].lng)
             path += String(rawGeopoints[i].lat) + "," + String(rawGeopoints[i].lng) + "|"
         }
         // console.log(path)
@@ -75,15 +66,12 @@ const UserInput = (prop) => {
 
         axios(config)
             .then(function (response) {
-                // console.log(response.data);
-                // console.log(response.data[Object.keys(response.data)[0]])
                 const snappedPoints = response.data[Object.keys(response.data)[0]]
                 for (let i = 0; i < snappedPoints.length; i++) {
                     Axios.post("http://localhost:8080/createSnappedGeopoints", {
                         lat: snappedPoints[i].location.latitude,
                         lng: snappedPoints[i].location.longitude,
                     }).then((response) => {
-                        // console.log(response.data);
                     });
                 }
                 getSnappedData();
@@ -154,7 +142,6 @@ const UserInput = (prop) => {
             {isFilePicked ? (
                 <div>
                     <p>File Name: {selectedFile.name}</p>
-                    {/* <p>Filetype: {selectedFile.type}</p> */}
                     <p>File Size (bytes): {selectedFile.size}</p>
                     <p>
                         File Last Modified Date:{' '}
