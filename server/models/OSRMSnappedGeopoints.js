@@ -10,7 +10,7 @@ const OSRMSnappedGeopointsSchema = new mongoose.Schema({
         required: true,
     },
 }, {
-    versionKey: false // You should be aware of the outcome after set to false
+    versionKey: false
 });
 
 const OSRMSnappedGeopointsModel = mongoose.model("osrm-snapped-geopoints", OSRMSnappedGeopointsSchema)

@@ -71,8 +71,6 @@ app.delete("/deleteRawGeopoints", (req, res) => {
 
 app.post("/createRawGeopoints", async (req, res) => {
     const geopoint = req.body;
-    // const newGeopoint = new RawGeopointsModel(geopoint);
-    // await newGeopoint.save();
     RawGeopointsModel.insertMany(geopoint)
         .then(function (docs) {
             res.json(docs);
@@ -80,8 +78,6 @@ app.post("/createRawGeopoints", async (req, res) => {
         .catch(function (err) {
             res.status(500).send(err);
         });
-
-    // res.json(geopoint)
 })
 
 app.post("/createSnappedGeopoints", async (req, res) => {

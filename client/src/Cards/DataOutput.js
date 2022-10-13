@@ -60,7 +60,7 @@ const DataOutput = (props) => {
 
     const downloadSnappedData = () => {
         var blob = new Blob([JSON.stringify(snappedData)], { type: "text/plain;charset=utf-8" });
-        FileSaver.saveAs(blob, "hello world.json");
+        FileSaver.saveAs(blob, "map-matched-data.json");
     }
 
     const getRawDataHelper = async () => {
