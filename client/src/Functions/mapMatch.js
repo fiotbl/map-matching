@@ -1,9 +1,7 @@
 import Axios from "axios";
 import { getRawData } from "./getRawData";
-import { postSnappedData } from "./postSnappedData";
 
 export const mapMatch = async () => {
-
     const deleteSnappedGeopointsData = async () => {
         await Axios.delete("http://localhost:8080/deleteSnappedGeopoints").then((response) => {
             console.log("Deleted All Snapped GeoPoints")

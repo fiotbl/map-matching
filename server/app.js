@@ -6,6 +6,7 @@ const cors = require('cors');
 const RawGeopointsModel = require('./models/RawGeopoints')
 const SnappedGeopointsModel = require('./models/SnappedGeopoints')
 const OSRMSnappedGeopointsModel = require('./models/OSRMSnappedGeopoints')
+const MapboxSnappedGeopointsModel = require('./models/MapboxSnappedGeopoints')
 
 require("dotenv").config();
 
@@ -49,16 +50,6 @@ app.delete("/deleteSnappedGeopoints", (req, res) => {
     })
 })
 
-app.delete("/deleteOSRMSnappedGeopoints", (req, res) => {
-    OSRMSnappedGeopointsModel.remove({}, (err, result) => {
-        if (err) {
-            res.json(err)
-        } else {
-            res.json(result)
-        }
-    })
-})
-
 app.delete("/deleteRawGeopoints", (req, res) => {
     RawGeopointsModel.remove({}, (err, result) => {
         if (err) {
@@ -92,6 +83,17 @@ app.post("/createSnappedGeopoints", async (req, res) => {
         });
 })
 
+app.get("/getSnappedGeopoints", (req, res) => {
+    SnappedGeopointsModel.find({}, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(result)
+        }
+    })
+})
+
+// OSRM Routes
 app.post("/createOSRMSnappedGeopoints", async (req, res) => {
     const OSRMSnappedGeopoint = req.body;
     console.log("in OSRMSnappedGeopoint API", OSRMSnappedGeopoint)
@@ -104,8 +106,8 @@ app.post("/createOSRMSnappedGeopoints", async (req, res) => {
         });
 })
 
-app.get("/getSnappedGeopoints", (req, res) => {
-    SnappedGeopointsModel.find({}, (err, result) => {
+app.get("/getOSRMSnappedGeopoints", (req, res) => {
+    OSRMSnappedGeopointsModel.find({}, (err, result) => {
         if (err) {
             res.json(err)
         } else {
@@ -114,8 +116,40 @@ app.get("/getSnappedGeopoints", (req, res) => {
     })
 })
 
-app.get("/getOSRMSnappedGeopoints", (req, res) => {
-    OSRMSnappedGeopointsModel.find({}, (err, result) => {
+app.delete("/deleteOSRMSnappedGeopoints", (req, res) => {
+    OSRMSnappedGeopointsModel.remove({}, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(result)
+        }
+    })
+})
+
+// Mapbox Routes
+app.post("/createMapboxSnappedGeopoints", async (req, res) => {
+    const MapboxSnappedGeopoint = req.body;
+    MapboxSnappedGeopointsModel.insertMany(MapboxSnappedGeopoint)
+        .then(function (docs) {
+            res.json(docs);
+        })
+        .catch(function (err) {
+            res.status(500).send(err);
+        });
+})
+
+app.get("/getMapboxSnappedGeopoints", (req, res) => {
+    MapboxSnappedGeopointsModel.find({}, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(result)
+        }
+    })
+})
+
+app.delete("/deleteMapboxSnappedGeopoints", (req, res) => {
+    MapboxSnappedGeopointsModel.remove({}, (err, result) => {
         if (err) {
             res.json(err)
         } else {

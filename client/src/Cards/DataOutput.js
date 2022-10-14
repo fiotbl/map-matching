@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 
 import { getSnappedData } from "../Functions/getSnappedData";
 import { getOSRMSnappedData } from "../Functions/getOSRMSnappedData";
+import { getMapboxSnappedData } from "../Functions/getMapboxSnappedData";
 import { getRawData } from "../Functions/getRawData";
 
 import Table from '@mui/material/Table';
@@ -80,20 +81,12 @@ const DataOutput = (props) => {
                 snappedDataFetched = await getOSRMSnappedData();
                 setSnappedData(snappedDataFetched);
                 break;
+            case 30:
+                snappedDataFetched = await getMapboxSnappedData();
+                setSnappedData(snappedDataFetched);
+                break;
         }
     }
-
-
-    // if (props.algorithm == 10) {
-    //     const snappedDataFetched = await getSnappedData();
-    //     console.log("Snapped data fetched", snappedDataFetched)
-    //     setSnappedData(snappedDataFetched);
-    // }
-    // else if (props.algorithm == 20) {
-    //     const snappedDataFetched = await getOSRMSnappedData();
-    //     console.log("Snapped data fetched", snappedDataFetched)
-    //     setSnappedData(snappedDataFetched);
-    // }
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

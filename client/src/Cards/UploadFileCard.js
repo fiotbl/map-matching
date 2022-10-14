@@ -104,6 +104,7 @@ const UploadFileCard = (props) => {
                                 >
                                     <MenuItem value={10}>Google Maps Snap to Roads</MenuItem>
                                     <MenuItem value={20}>Open Source Routing Machine</MenuItem>
+                                    <MenuItem value={30}>Mapbox</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box>

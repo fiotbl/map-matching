@@ -15,3 +15,5 @@ const OSRMSnappedGeopointsSchema = new mongoose.Schema({
 
 const OSRMSnappedGeopointsModel = mongoose.model("osrm-snapped-geopoints", OSRMSnappedGeopointsSchema)
 module.exports = OSRMSnappedGeopointsModel;
+
+

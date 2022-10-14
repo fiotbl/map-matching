@@ -12,9 +12,10 @@ import { ThemeProvider } from '@mui/material/styles';
 // functions
 import { getSnappedData } from "./Functions/getSnappedData";
 import { getOSRMSnappedData } from "./Functions/getOSRMSnappedData";
+import { getMapboxSnappedData } from "./Functions/getMapboxSnappedData";
 import { mapMatch } from "./Functions/mapMatch";
 import { OSRMMapMatch } from "./Functions/OSRMMapMatch";
-
+import { mapboxMapMatch } from "./Functions/mapboxMapMatch";
 
 
 function App() {
@@ -28,13 +29,6 @@ function App() {
   const [showSnappedData, setShowSnappedData] = useState(false);
   const [algorithm, setAlgoritm] = useState();
 
-
-
-  const testCall = async () => {
-    const testData = await getSnappedData();
-    setSnappedJson(testData);
-    console.log(testData);
-  };
 
   const setIsFilePickedHandler = (isPicked) => {
     setIsFilePicked(isPicked);
@@ -72,24 +66,14 @@ function App() {
         await OSRMMapMatch();
         snappedData = await getOSRMSnappedData();
         break;
+      case 30:
+        await mapboxMapMatch();
+        snappedData = await getMapboxSnappedData();
+        break;
     }
     setSnappedJson(snappedData);
     setShowSnappedData(!showSnappedData);
   };
-
-  // console.log("check here", algorithm)
-  // if (algorithm == 10) {
-  //   await mapMatch();
-  //   const snappedData = await getSnappedData();
-  //   setSnappedJson(snappedData);
-  //   setShowSnappedData(!showSnappedData);
-  // }
-  // else if (algorithm == 20) {
-  //   await OSRMMapMatch();
-  //   const OSRMSnappedData = await getOSRMSnappedData();
-  //   setSnappedJson(OSRMSnappedData);
-  //   setShowSnappedData(!showSnappedData);
-  // }
 
   const setShowRawDataHandler = () => {
     setShowRawData(true);
