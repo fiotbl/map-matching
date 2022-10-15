@@ -28,6 +28,7 @@ function App() {
   const [showRawData, setShowRawData] = useState(false);
   const [showSnappedData, setShowSnappedData] = useState(false);
   const [algorithm, setAlgoritm] = useState();
+  const [mapAlgorithm, setMapAlgoritm] = useState();
 
 
   const setIsFilePickedHandler = (isPicked) => {
@@ -73,6 +74,7 @@ function App() {
     }
     setSnappedJson(snappedData);
     setShowSnappedData(!showSnappedData);
+    setMapAlgoritm(algorithm);
   };
 
   const setShowRawDataHandler = () => {
@@ -122,7 +124,7 @@ function App() {
           </div>
         </div>
         <div className="Map">
-          <Map rawJson={rawJson} snappedJson={snappedJson} />
+          <Map rawJson={rawJson} snappedJson={snappedJson} mapAlgorithm={mapAlgorithm} showSnappedData={showSnappedData} />
         </div>
       </div>
     </ThemeProvider>
